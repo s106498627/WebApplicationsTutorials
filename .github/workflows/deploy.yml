@@ -49,7 +49,8 @@ jobs:
             -u "${{ secrets.VPN_USER }}" \
             --passwd-on-stdin \
             --background \
-            "${{ secrets.VPN_HOSTNAME }}"
+            "${{ secrets.VPN_HOSTNAME }}" \
+            --form-entry=main:secondary="push"
       - name: Deploy via SCP
         run: |
           scp -r ./* ${{ secrets.USERNAME }}@${{ vars.MERCURY_URI }}:~/${{ secrets.SITE_ROOT }}

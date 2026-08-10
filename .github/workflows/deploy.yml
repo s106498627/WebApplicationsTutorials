@@ -4,6 +4,8 @@ name: Deploy static content to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
+    path-ignore:
+    - .github/**
     branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
@@ -25,19 +27,21 @@ jobs:
   # Single deploy job since we're just deploying
   deploy:
     environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      name: Mercury Server
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Configure SSH Key
+        uses: webfactory/ssh-agent@v0.9.0
         with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+      - name: Delete previous deployment
+        run: |
+          ssh ${{ secrets.USERNAME }}@${{ vars.MERCURY_URI }}
+          if [ -d "~/${{ secrets.SITE_ROOT }}" ]; then rm -rf "~/${{ secrets.SITE_ROOT }}"; mkdir -p "~/${{ secrets.SITE_ROOT }}"; fi
+        shell: bash
+      - name: Copy Site to Server
+        run: |
+          scp -r ./* ${{ secrets.USERNAME }}@${{ vars.MERCURY_URI }}:~/${{ secrets.SITE_ROOT }}
+

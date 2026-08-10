@@ -37,31 +37,7 @@ jobs:
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
-      - name: Install OpenConnect
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y openconnect
-
-      - name: Start VPN Connection
-        run: |
-          echo "${{ secrets.VPN_PASSWD }}" | sudo openconnect \
-            --protocol=anyconnect \
-            -u "${{ secrets.VPN_USER }}" \
-            --passwd-on-stdin \
-            --background \
-            "${{ secrets.VPN_HOSTNAME }}" \
-            --form-entry=main:secondary="push"
       - name: Deploy via SCP
         run: |
           scp -r ./* ${{ secrets.USERNAME }}@${{ vars.MERCURY_URI }}:~/${{ secrets.SITE_ROOT }}
         shell: bash
-      # - name: Deploy via SCP
-      #   uses: appleboy/scp-action@v0.1.7
-      #   with:
-      #     host: ${{ vars.MERCURY_URI }}
-      #     username: ${{ secrets.USERNAME }}
-      #     key: ${{ secrets.SSH_KEY }}
-      #     port: 22
-      #     source: "./*" # Selects all files in your repository root
-      #     target: "~/${{ secrets.SITE_ROOT }}" # The web root folder on your target server
-      #     strip_components: 0

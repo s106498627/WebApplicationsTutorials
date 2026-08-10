@@ -4,7 +4,8 @@ name: Deploy static content to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    path-ignore:
+    
+    paths-ignore:
     - .github/**
     branches: ["main"]
 
@@ -36,12 +37,13 @@ jobs:
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
-      - name: Delete previous deployment
-        run: |
-          ssh ${{ secrets.USERNAME }}@${{ vars.MERCURY_URI }}
-          if [ -d "~/${{ secrets.SITE_ROOT }}" ]; then rm -rf "~/${{ secrets.SITE_ROOT }}"; mkdir -p "~/${{ secrets.SITE_ROOT }}"; fi
-        shell: bash
-      - name: Copy Site to Server
-        run: |
-          scp -r ./* ${{ secrets.USERNAME }}@${{ vars.MERCURY_URI }}:~/${{ secrets.SITE_ROOT }}
-
+      - name: Deploy via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ vars.MERCURY_URI }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          source: "./*" # Selects all files in your repository root
+          target: "~/${{ secrets.SITE_ROOT }}" # The web root folder on your target server
+          strip_components: 0

@@ -38,12 +38,16 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
       - name: Deploy via SCP
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ vars.MERCURY_URI }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          port: 22
-          source: "./*" # Selects all files in your repository root
-          target: "~/${{ secrets.SITE_ROOT }}" # The web root folder on your target server
-          strip_components: 0
+        run: |
+          scp -r ./* ${{ secrets.USERNAME }}@${{ vars.MERCURY_URI }}:~/${{ secrets.SITE_ROOT }}
+        shell: bash
+      # - name: Deploy via SCP
+      #   uses: appleboy/scp-action@v0.1.7
+      #   with:
+      #     host: ${{ vars.MERCURY_URI }}
+      #     username: ${{ secrets.USERNAME }}
+      #     key: ${{ secrets.SSH_KEY }}
+      #     port: 22
+      #     source: "./*" # Selects all files in your repository root
+      #     target: "~/${{ secrets.SITE_ROOT }}" # The web root folder on your target server
+      #     strip_components: 0

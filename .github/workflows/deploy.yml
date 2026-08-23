@@ -37,6 +37,7 @@ jobs:
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
+          lfs: true
       - name: Deploy via SCP
         run: |
           scp -r ./* ${{ secrets.USERNAME }}@${{ vars.MERCURY_URI }}:~/${{ secrets.SITE_ROOT }}

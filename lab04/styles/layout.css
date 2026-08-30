@@ -1,0 +1,91 @@
+/*
+filename: Charlie Hutcheson
+author: Charlie Hutcheson
+created: 2026-08-23
+last modified: 2026-08-23
+description: styles lab04task1.html
+*/
+
+aside {
+    border: 4px inset purple;
+    border-radius: 14px;
+    box-shadow: 10px 10px 5px #aaaaaa;
+    margin: 1em;
+    padding: 1em;
+    width: 30%;
+    background: url("images/fade.jpg") repeat-x top left;
+    float: right;
+}
+
+article {
+    min-width: 30em;
+}
+
+header {
+    border: 1px darkgray;
+    margin: 0.5em;
+    padding: 0.5em;
+    background-color: lightgray;
+    text-align: center;
+}
+
+aside:hover {
+    visibility: visible;
+    display: block;
+}
+
+.menu {
+    display: inline-block;
+}
+
+#lists {
+    float: left;
+}
+
+#tables {
+    float: right;
+}
+
+#hyperlinks {
+    clear: both;
+    float: left;
+}
+
+#images {
+    float: right;
+}
+
+#lists, #images, #tables, #hyperlinks {
+    width: 50%;
+    text-align: center;
+}
+
+figure {
+    border: 2px solid #ccc;
+}
+
+footer {
+    clear: both;
+}
+
+footer p {
+    display: inline-block;
+    width: 33%;
+}
+
+footer p:first-child {
+    float: left;
+}
+
+footer p:nth-child(2) {
+    text-align: center;
+}
+
+footer p:last-child {
+    text-align: right;
+    float: right;
+}
+
+ol, ul, dl {
+    text-align: left;
+}

@@ -1,0 +1,9 @@
+footer {
+  background-color: #333333;
+  color: aliceblue;
+  grid-area: footer;
+  font: 12px "Fira Sans";
+  text-align: center;
+  padding: 20px 0;
+  width: 100%;
+}

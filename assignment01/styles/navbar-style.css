@@ -1,0 +1,43 @@
+.navbar {
+    align-items: center;
+    background-color: red;
+    color: aliceblue;
+    display: flex;
+    grid-area: navbar;
+    justify-content: space-between;
+    padding: 0.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-logo {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.navbar-link-group {
+    color: white;
+    display: flex;
+}
+
+/* THIS SHOULD BE MODIFIED WITH button-link IN style.css 
+TO KEEP CONSISTENT THEMING */
+.navbar-link-item {
+    background-color: transparent;
+    border-color: transparent;
+    color: aliceblue;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+}
+
+.navbar-link-item:hover {
+    background-color: coral;
+    border-color: transparent;
+    border-radius: 5px;
+    color: aliceblue;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+}

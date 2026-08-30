@@ -1,0 +1,4 @@
+.icons-photo::before {
+    font-family: "Google Icons";
+    content: '\e410';
+}

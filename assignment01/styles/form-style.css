@@ -47,14 +47,12 @@ legend {
 }
 
 fieldset label {
-    align-items: center;
     display: flex;
     gap: 0.5rem;
     width: 100%;
 }
 
 fieldset label input {
-    flex: 0 0 auto;
     width: auto;
 }
 

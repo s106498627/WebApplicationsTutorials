@@ -37,12 +37,31 @@ main {
     grid-area: main;
 }
 
-p, dl, h1, h2, ul, ol {
+p,
+dl,
+h1,
+h2,
+ul,
+ol {
     margin-left: 2rem;
     margin-right: 2rem;
     list-style-position: inside;
 
-} 
+}
+
+.definition {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.2rem 2rem;
+}
+
+.definition dt {
+    text-align: right;
+}
+
+.definition dd {
+    text-align: left;
+}
 
 .button-link {
     background-color: red;
@@ -61,5 +80,5 @@ p, dl, h1, h2, ul, ol {
 }
 
 .content {
-  flex: 1 0 auto;
+    flex: 1 0 auto;
 }

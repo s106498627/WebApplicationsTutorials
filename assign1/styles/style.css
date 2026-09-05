@@ -73,7 +73,7 @@ ol {
 }
 
 h1 {
-    font: 3rem "Fira Sans";
+    font: bold 3rem "Fira Sans";
 }
 
 .definition {
@@ -92,6 +92,7 @@ h1 {
 
 .photo-border {
     border: 4px double var(--primary-color);
+    padding: 20px;
 }
 
 .button-link {

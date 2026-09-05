@@ -26,9 +26,6 @@ description: styles the timetable, used in about.html
     border: 1px solid black;
 }
 
-
-
-/* 4. Cell Adjustments */
 .timetable td,
 .timetable th {
     text-align: center;

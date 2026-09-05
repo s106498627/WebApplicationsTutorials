@@ -1,0 +1,53 @@
+/*
+filename: style-tile.css
+author: Charles Hutcheson
+created: 2026-08-30
+last modified: 2026-09-05
+description: styles the product tiles in the grid layout, used in product.html
+*/
+
+.product-layout {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: 3fr 1fr;
+    margin: 2rem 2rem;
+
+}
+
+.tile-group {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+}
+
+
+.tile {
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    list-style-position: inside;
+    padding: 1rem;
+}
+
+.tile ul,
+.tile ol,
+.tile h2 {
+    margin: 0;
+    width: 100%;
+}
+
+.tile:hover {
+    border-color: var(--primary-hover-color);
+}
+
+.tile h2 {
+    margin-bottom: 0.5rem;
+}
+
+.tile img {
+    transition: transform 0.2s ease-in-out;
+}
+
+.tile:hover img,
+.tile:focus-within img {
+    transform: scale(1.1);
+}

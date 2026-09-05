@@ -1,0 +1,19 @@
+/*
+filename: style-fonts.css
+author: Charles Hutcheson
+created: 2026-08-30
+last modified: 2026-09-05
+description: declares font-face rules, imported by style.css into every page
+*/
+
+/* Fira Sans Google font */
+@font-face {
+    font-family: "Fira Sans";
+    src: url(../resources/FiraSans-Regular.ttf);
+}
+
+/* Google Icons font */
+@font-face {
+    font-family: "Google Icons";
+    src: url(../resources/Google-Icons.ttf);
+}

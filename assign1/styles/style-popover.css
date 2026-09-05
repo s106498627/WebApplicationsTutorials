@@ -1,0 +1,39 @@
+/*
+filename: style-popover.css
+author: Charles Hutcheson
+created: 2026-09-05
+last modified: 2026-09-05
+description: styles the product modal (popover), used in product.html
+*/
+
+[popover] {
+    margin: auto;
+    border: none;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 30rem;
+    width: 90vw;
+    opacity: 100%;
+    /* modal contents animation */
+    transition: opacity 0.25s ease, display 0.25s ease;
+}
+
+/* background dimming transition */
+[popover]::backdrop {
+    background: rgb(0, 0, 0, 0%);
+    transition: background 0.25s ease;
+}
+
+/* final transform state */
+[popover]:popover-open::backdrop {
+    background: rgb(0, 0, 0, 50%);
+}
+
+/* start transparent to allow clean transition */
+/* starting-style fails validation but it's a valid rule 
+   according to: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@starting-style */
+@starting-style {
+    [popover]:popover-open::backdrop {
+        background: rgb(0, 0, 0, 0%);
+    }
+}

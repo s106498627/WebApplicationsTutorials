@@ -1,0 +1,146 @@
+/*
+filename: form.css
+author: Charles Hutcheson
+created: 2026-08-30
+last modified: 2026-09-05
+description: style the enquiry form, used in enquiry.html
+*/
+
+form {
+    display: grid;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem auto;
+    min-width: 50rem;
+    max-width: 80vw;
+    place-items: center;
+    row-gap: 1rem;
+}
+
+form div {
+    align-items: flex-start;
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+/* > to capture first level child labels only. checkbox labels overflow without this. 
+   as checkbox labels are inside a fieldset they are lower in the heirarchy than the
+   other labels so do not get this style. 
+   https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Selectors#Combinators */
+form div>label {
+    flex: 0 0 9rem;
+    font-weight: bold;
+}
+
+/* for wrapping the field and error message together */
+.field {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: flex-start;
+}
+
+/* get text inputs to extend to the edge of the column */
+.field input,
+.field select {
+    width: 100%;
+}
+
+/* demarkates columns for use in the landscape view. */
+.form-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+/* hide the error initially, only populate when user-invalid atr is fired */
+.field-error {
+    color: var(--primary-color);
+    display: none;
+    font-size: smaller;
+    /* make the error message smaller to not displace the text areas as much */
+}
+
+/* user-invalid attr only matches once the user has interacted with a field,
+   unlike :invalid which flags empty required fields immediately on load */
+input:user-invalid {
+    border: 1px solid var(--primary-color);
+    border-radius: 2px;
+    /* mimic the roundness of the input box */
+}
+
+/* searches for all .field-errors at same heirarchy level as input with 
+   user-invalid attr, makes element visible when user-invalid activated */
+input:user-invalid~.field-error {
+    display: flex;
+}
+
+
+/* hidden error message, appears only if there is invalid 
+   input on form */
+.form-hint {
+    color: var(--primary-color);
+    display: none;
+    font-size: 1rem;
+}
+
+/* check for elem with invalid attr, and display form 
+   completion message if so */
+form:has(:invalid) .form-hint {
+    display: block;
+}
+
+/* disable button until form is validated */
+form:has(:invalid) button[type="submit"] {
+    cursor: not-allowed;
+    /* contextual hint that you cant select button */
+    opacity: 0.5;
+    pointer-events: none;
+    /* do not accept any mouse interaction */
+}
+
+form textarea {
+    min-height: 6rem;
+    width: 100%;
+    resize: vertical;
+}
+
+fieldset {
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem;
+    width: 100%;
+}
+
+legend {
+    font-weight: bold;
+    padding: 0 0.5rem;
+}
+
+/* checkbox and radiobox label styling */
+fieldset label {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+/* state select box doesn't land in a field class so 
+   needs it's own width param */
+fieldset select {
+    width: 100%;
+    ;
+}
+
+@media (orientation: landscape) {
+    form {
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+        /* make columns line up in landscape mode */
+    }
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style-carousel.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.png">
+    <title>Enhancements</title>
+</head>
+
+<body>
+    <!-- BEGIN Nav Bar -->
+    <nav class="navbar">
+        <a href="index.html">
+            <img src="images/sandish_logo.png" alt="Sandish logo, press to home." height="30">
+        </a>
+
+        <div class="navbar-link-group">
+            <a class="button-link" href=".">Home</a>
+            <a class="button-link" href="product.html">Products</a>
+            <a class="button-link" href="enquire.html">Enquire</a>
+            <a class="button-link" href="about.html">About</a>
+            <a class="button-link" href="enhancements.html">Enhancements</a>
+        </div>
+    </nav>
+    <!-- END Nav Bar -->
+
+    <main>
+        <br>
+        <h1>
+            Webpage Enhancements
+        </h1>
+        <br>
+        <h2>
+            The Product Carousel
+        </h2>
+        <p>
+            I initially thought of adding a product carousel to the home page, where the explore products link is. It is
+            a very common technique in modern websites. I thought this would enhance the home page by showing a teaser
+            of the produts Sandish offers. I have included the implementation below for reference, you can horizontally
+            scroll to browse products. I ended up not including it in the final product because the carousel CSS styling
+            is not fully implemented in Firefox. In Chrome based browsers you can render pagination dots to show how far
+            you are in the carousel and next/previous buttons but because Firefox has not yet implemented those
+            features, and Firefox support was a strict requirement, I removed it from the page. Carousels are usually
+            made with JS, so maybe in later assignments I can bring this idea back.
+
+            I learnt how to do this from the <a
+                href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Overflow/Carousels">Mozilla Development
+                Network (MDN) carousel tutorial page.</a>
+        </p>
+        <br>
+        <h3>My Attempt at a JS-less Carousel</h3>
+        <!-- BEGIN carousel -->
+        <section class="center-container">
+            <ul class="carousel">
+                <li class="carousel-item" id="item-1">
+                    <h2>PokeDrive</h2>
+                    <div class="center-container">
+                        <img src="images/product/pokemon-usb-c.png" alt="Pokemon USB drive.">
+                    </div>
+                    <ul>
+                        <li>Fun collectible pocket monster design.</li>
+                        <li>Protective outer shell.</li>
+                        <li>Great novelty gift for fans.</li>
+                    </ul>
+                </li>
+                <li class="carousel-item" id="item-2">
+                    <h2>Encrypt-A-Drive</h2>
+                    <div class="center-container">
+                        <img src="images/product/extreme-usb.webp" alt="Extreme USB drive.">
+                    </div>
+                    <ul>
+                        <li>Advanced hardware-based data encryption.</li>
+                        <li>Massive multi-terabyte storage room.</li>
+                        <li>Secure password or biometric access.</li>
+                    </ul>
+                </li>
+                <li class="carousel-item" id="item-3">
+                    <h2>The Classic</h2>
+                    <div class="center-container">
+                        <img src="images/product/classic-usb-a.webp" alt="Classic USB drive.">
+                    </div>
+                    <ul>
+                        <li>Plug it into any standard USB-A port.</li>
+                        <li>Transfer files instantly with no setup required.</li>
+                        <li>Store your data safely in durable casing.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <!-- END carousel -->
+        <br>
+        <h2>
+            Expanded Product Details
+        </h2>
+        <br>
+        <p>
+            To replace the carousel idea, I next thought about a modal box (popover) that pops up to show expanded
+            detail on the product you are interested in. This makes the page less cluttered so the user can focus on the
+            product itself and the key points, and only read about what they are interested in.
+
+            All code is adapted from the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Popover_API">MDN
+                popover API page.</a> I modified the standard styling to fit the Sandish site, with an appropriately
+            styled close button, corner rounding on the popover, and dimming the background contents whilst the popover
+            is open to improve legibility.
+
+            You can find the implementation <a href="product.html#products">here.</a>
+        </p>
+        <br>
+        <h2>
+            Reactive Contact Form
+        </h2>
+        <br>
+        <p>
+            I got the idea of a reactive form from online shopping, but I cannot recall which exact site sparked my interest. I came across <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:user-invalid">this attribute ":user-invalid"</a> scouring the MDN which made this possible. This way, I can show or hide an error message depending on if a user-created error was detected.
+
+            I have used tailwind in the past to style reactive websites that turn into a mobile layout when the screen is small enough, and I wanted to try to mimic this by making the form turn into 2 columns when the screen is detected as landscape to better fill the space. From googling, Gemini gave me the idea of using @media to detect the orientation to landscape. 
+        </p>
+        <br>
+
+    </main>
+
+    <!-- START footer -->
+    <footer>
+        &copy; 2026 Sandish Pty Ltd.
+    </footer>
+    <!-- END footer -->
+</body>
+
+</html>

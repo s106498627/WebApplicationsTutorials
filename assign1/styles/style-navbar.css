@@ -1,0 +1,32 @@
+/*
+filename: style-navbar.css
+author: Charles Hutcheson
+created: 2026-08-30
+last modified: 2026-09-05
+description: styles the site navbar, imported by style.css into every page
+*/
+
+.navbar {
+    align-items: center;
+    background-color: var(--primary-color);
+    color: var(--secondary-text-color);
+    display: flex;
+    grid-area: navbar;
+    justify-content: space-between;
+    padding: 0.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-link-group {
+    display: flex;
+}
+
+
+.navbar-link-item:hover {
+    background-color: var(--primary-hover-color);
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+}

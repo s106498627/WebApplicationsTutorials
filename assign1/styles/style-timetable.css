@@ -1,0 +1,72 @@
+/*
+filename: style-timetable.css
+author: Charles Hutcheson
+created: 2026-09-04
+last modified: 2026-09-05
+description: styles the timetable, used in about.html
+*/
+
+.timetable {
+    width: 100%;
+    background-color: var(--timetable-background-color);
+    border-collapse: collapse;
+    max-width: 50rem;
+    /* even out the column widths */
+    table-layout: fixed;
+}
+
+.timetable th {
+    background-color: var(--timetable-background-color);
+    color: black;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    padding: 1rem;
+    border: 1px solid black;
+}
+
+
+
+/* 4. Cell Adjustments */
+.timetable td,
+.timetable th {
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.5rem;
+}
+
+.timetable td, tbody {
+    border: 1px solid black;
+}
+
+/* Time column accent */
+.timetable td:first-child {
+    background-color: var(--timetable-background-color);
+    color: black;
+}
+
+/* Colors for different subjects */
+.timetable .work {
+    background: var(--timetable-primary-color);
+}
+
+.timetable .work:hover {
+    background: var(--timetable-primary-color-hover);
+}
+
+.timetable .webapp {
+    background: var(--timetable-secondary-color);
+}
+
+.timetable .webapp:hover {
+    background: var(--timetable-secondary-color-hover);
+}
+
+.timetable .data {
+    background: var(--timetable-tertiary-color);
+}
+
+.timetable .data:hover {
+    background: var(--timetable-tertiary-color-hover);
+}

@@ -1,0 +1,119 @@
+/*
+filename: style.css
+author: Charles Hutcheson
+created: 2026-08-22
+last modified: 2026-09-05
+description: used globally, containing common variables and styles that are used on each page of the site.
+*/
+
+
+/* importing styles used on every page into here */
+@import url("style-icons.css");
+@import url("style-footer.css");
+@import url("style-navbar.css");
+@import url("style-fonts.css");
+
+/* site-wide consts */
+:root {
+    --primary-color: rgb(217,25,46);
+    --secondary-color: rgb(0,40,93);
+    --tertiary-color: rgb(215,171,58);
+    --background-color: rgb(215, 222, 225);
+    --background-border-color: rgb(190, 195, 200);
+    --footer-color: #333333;
+
+    --text-color: black;
+    --secondary-text-color: aliceblue;
+
+    --primary-hover-color: rgb(255, 50, 74);
+
+    --timetable-primary-color: rgb(0,40,93, 35%);
+    --timetable-primary-color-hover: rgb(0,40,93, 60%);
+    --timetable-secondary-color: rgb(217,25,46, 35%);
+    --timetable-secondary-color-hover: rgb(217,25,46, 60%);
+    --timetable-tertiary-color: rgb(215,171,58, 35%);
+    --timetable-tertiary-color-hover: rgb(215,171,58, 60%);
+    --timetable-background-color: rgb(190, 195, 200, 35%); 
+}
+
+* {
+    /* make elements go all the way to the edge */
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+
+    /* site-wide font */
+    font-family: 'Fira Sans';
+}
+
+body {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 1fr;
+    grid-template-areas: "navbar" "main" "footer";
+    grid-template-rows: 3rem 1fr auto;
+    min-height: 100vh;
+}
+
+main {
+    grid-area: main;
+}
+
+p,
+dl,
+h1,
+h2,
+h3,
+ul,
+ol {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    list-style-position: inside;
+
+}
+
+h1 {
+    font: 3rem "Fira Sans";
+}
+
+.definition {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.2rem 2rem;
+}
+
+.definition dt {
+    text-align: right;
+}
+
+.definition dd {
+    text-align: left;
+}
+
+.photo-border {
+    border: 4px double var(--primary-color);
+}
+
+.button-link {
+    background-color: var(--primary-color);
+    border-color: transparent;
+    border-radius: 5px;
+    color: var(--secondary-text-color);
+    display: inline-block;
+    padding: 0.5rem 0.5rem;
+    text-align: center;
+    text-decoration: none;
+}
+
+.button-link:hover {
+    background-color: var(--primary-hover-color);
+}
+
+.center-container {
+    display: grid;
+    place-items: center;
+}
+
+.content {
+    flex: 1 0 auto;
+}

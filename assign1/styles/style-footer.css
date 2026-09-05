@@ -1,0 +1,17 @@
+/*
+filename: style-footer.css
+author: Charles Hutcheson
+created: 2026-08-30
+last modified: 2026-09-05
+description: styles the site footer, imported by style.css into every page
+*/
+
+footer {
+  background-color: var(--footer-color);
+  color: aliceblue;
+  grid-area: footer;
+  font: 12px "Fira Sans";
+  text-align: center;
+  padding: 20px 0;
+  width: 100%;
+}

@@ -1,0 +1,51 @@
+/*
+filename: style-carousel.css
+author: Charles Hutcheson
+created: 2026-09-05
+last modified: 2026-09-05
+description: styles the JS-less carousel, used in enhancements.html
+*/
+
+ul.carousel {
+  position: relative;
+  width: 80vw;
+  height: 32rem;
+  padding: 2rem 2rem 2rem 2rem;
+  display: flex;
+  gap: 4vw;
+
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+}
+
+.carousel .carousel-item {
+  list-style-type: none;
+  background-color: var(--background-color);
+  border: 1px solid var(--background-border-color);
+  padding: 2rem;
+
+  scroll-snap-align: center;
+
+  flex: 0 0 100%;
+}
+
+.carousel .carousel-item:hover {
+  list-style-type: none;
+  background-color: var(--background-color);
+  border: 2px solid var(--primary-color);
+  padding: 2rem;
+
+  scroll-snap-align: center;
+
+  flex: 0 0 100%;
+}
+
+.carousel-nav {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  translate: -50% 0;
+  display: flex;
+  gap: 1rem;
+}

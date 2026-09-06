@@ -43,12 +43,12 @@ description: used globally, containing common variables and styles that are used
     padding: 0;
 
     /* site-wide font */
-    font-family: 'Fira Sans';
+    font-family: 'Fira Sans', sans-serif;
 }
 
 body {
     display: grid;
-    grid-gap: 0px;
+    grid-gap: 0;
     grid-template-columns: 1fr;
     grid-template-areas: "navbar" "main" "footer";
     grid-template-rows: 3rem 1fr auto;

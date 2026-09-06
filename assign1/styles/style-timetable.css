@@ -13,6 +13,7 @@ description: styles the timetable, used in about.html
     max-width: 50rem;
     /* even out the column widths */
     table-layout: fixed;
+    text-align: center; /* all text on table is centered */
 }
 
 .timetable th {
@@ -26,18 +27,11 @@ description: styles the timetable, used in about.html
     border: 1px solid black;
 }
 
-.timetable td,
-.timetable th {
-    text-align: center;
-    vertical-align: middle;
-    padding: 0.5rem;
-}
-
 .timetable td, tbody {
     border: 1px solid black;
 }
 
-/* Time column accent */
+/* Time column accent - match table head */
 .timetable td:first-child {
     background-color: var(--timetable-background-color);
     color: black;

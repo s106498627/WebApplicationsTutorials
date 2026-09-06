@@ -20,7 +20,7 @@ description: styles the homepage hero banner, used in index.html
     justify-content: flex-end;
     position: relative;
     /* wide and soft shadow to help legibility, meant to blend into the gradient effect */
-    text-shadow: 10px 0px 50px #000000;
+    text-shadow: 10px 0 50px #000000;
     width: 100%;
 }
 

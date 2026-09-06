@@ -16,6 +16,7 @@
     <!-- BEGIN Nav Bar -->
     <nav class="navbar">
         <a href="index.html">
+            <!-- limit height to stay in bounds of navbar -->
             <img src="images/sandish_logo.png" alt="Sandish logo, press to home." height="30">
         </a>
 
@@ -121,7 +122,24 @@
             I have used tailwind in the past to style reactive websites that turn into a mobile layout when the screen is small enough, and I wanted to try to mimic this by making the form turn into 2 columns when the screen is detected as landscape to better fill the space. From googling, Gemini gave me the idea of using @media to detect the orientation to landscape, and I ended up making a column class to split the top and bottom half of the form into left and right.
         </p>
         <br>
-
+        <h2>
+            Overall Thoughts
+        </h2>
+        <br>
+        <p>
+            At work I occasionally use VueJS (infrequent, my team mostly works on the application's engine), it allows you to write fragments of HTML such as Header, or Footer, and then use them as tags in your other markup. So you could take the navbar markup fragment on this page and put it in a Header.vue file, and then use it just by adding it to the other markup like so:
+        </p>
+            <pre><code>
+                ...
+                &lt;body&gt;
+                    &lt;Header&gt;
+                ...
+                &lt;/body&gt;
+            </code></pre>
+        <p>
+            As I am used to this style of composition, I will be attempting to recreate this in part 2 of the assignment if permitted by the guidelines.
+        </p>
+        <br>
     </main>
 
     <!-- START footer -->

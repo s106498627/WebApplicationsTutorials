@@ -9,6 +9,9 @@ function showAnotherMessage() {
 
 function init() {
 	yourName = prompt('Hi. Enter your name.\nWhen the browser window is first loaded\nthe function containing this prompt window is called.', "Your name");
+
+	alert("Hi " + yourName + ". Alert is useful to debug vars.");
+
 	rewriteParagraph(yourName);
 	let clickme = document.getElementById("clickme");
 	clickme.onclick = showAnotherMessage;

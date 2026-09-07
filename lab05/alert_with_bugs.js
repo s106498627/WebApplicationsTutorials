@@ -9,14 +9,14 @@ function showAnotherMessage() {
 function init() {
 	yourName = prompt('Hi. Enter your name.\nWhen the browser window is first loaded\nthe function containing this prompt window is called.', "Your name");
 	rewriteParagraph(yourName);
-	
+
 	let clickme = document.getElementById("clickme");
 	clickme.onclick = showAnotherMessage;
 }
 
 function rewriteParagraph(userName) {
 	let msg = document.getElementById("message");
-	msg.innerHTML = "<p>HELLO " + userName + ", from JS!</p>";
+	msg.innerHTML = "Hi " + userName + ". If you can see this you have successfully overwritten the contents of this paragraph. Congratulations!";
 }
 
 function showCompletionMessage() {

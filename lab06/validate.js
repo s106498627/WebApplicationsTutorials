@@ -86,11 +86,23 @@ function getSpecies() {
 }
 
 const Result = class {
-    constructor(ok, err) {
+    constructor(ok, val) {
         /** @type {boolean} */
         this.ok = ok;
-        /** @type {string} */
-        this.err = err;
+        /** @type {any} */
+        this.val = val;
+    }
+
+    isValue() {
+        return this.ok;
+    }
+
+    /**
+     * 
+     * @returns @type {any} returns the value if ok, otherwise returns the error message.
+     */
+    unwrap() {
+        return this.val;
     }
 }
 
@@ -109,7 +121,7 @@ function validateSpeciesBeardLength() {
 
 
 
-    if (species == "Dwarf" && age < 30 && beardLength < 12) {
+    if (species == "Dwarf" && age > 30 && beardLength < 12) {
         errMsg += "Dwarves must have a beard of at least 12 inches.\n";
         result = false;
     } else if ((species == "Elf" || species == "Hobbit") && beardLength > 0) {
@@ -185,15 +197,15 @@ function validateDelegate() {
 
     let ret = validateSpeciesAge();
     if (result) {
-        result = ret.ok;
+        result = ret.isValue();
     }
-    errMsg += ret.err;
+    errMsg += ret.unwrap();
 
     ret = validateSpeciesBeardLength();
     if (result) {
-        result = ret.ok;
+        result = ret.isValue();
     }
-    errMsg += ret.err;
+    errMsg += ret.unwrap();
 
     let partySize = appState.form.partySize.value;
     if (partySize < 1 || partySize > 100) {

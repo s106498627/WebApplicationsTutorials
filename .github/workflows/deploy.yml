@@ -50,6 +50,7 @@ jobs:
         with:
           node-version: 26
           cache: 'npm' # Caches npm packages to speed up builds
+          cache-dependency-path: './assign2/vue-src/package-lock.json' 
 
       - name: Install dependencies
         run: npm ci

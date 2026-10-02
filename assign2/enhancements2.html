@@ -56,6 +56,8 @@
             I rewrote the <a href="enquire2.html">enquire form using VueJS</a>. I work full-time as a Software Engineer and use VueJS somewhat frequently at work (my team is primarily working on the core engine) so I felt comfortable using it for this enhancement. I used the <a href="https://vuejs.org/guide/essentials/forms.html">VueJS forms guide</a> as a basis for my new form. Using v-model was a very handy technique to pass through JS variables and update them on the fly without having to go through the lengthy document.getElementBy* each time you wanted an up-to-date view of the input. I alo used the <a href="https://vuejs.org/guide/essentials/event-handling.html">VueJS event handling guide</a> to learn how to handle submit events in the exact way needed for the enhancement.
 
             As most websites use VueJS or ReactJS these days, I thought this was a good enhancement to make. It was interesting to see how I can integrate new-age web technology on a more classical LAMP stack website. The other clear advantage of this is I can use TypeScript, which is essentially JavaScript with strict types. I despise dynaic typing because of the implicit type casting that causes a multitude of hard to find bugs as well as the IDE engine not being able to deduct the type meaning I cannot use code completion, and I was happy with the speed at which I could write TypeScript opposed to JavaScript.
+
+            Check .github/workflows/deploy.yml as this is how I am deploying to Mercury. I am Using GitHub Actions to build the VueJS code and copy it to the Mercury server.
     </main>
 
     <!-- START footer -->

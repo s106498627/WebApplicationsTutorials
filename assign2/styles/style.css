@@ -1,0 +1,181 @@
+/*
+filename: style.css
+author: Charles Hutcheson
+created: 2026-08-22
+last modified: 2026-09-26
+description: used globally, containing common variables and styles that are used on each page of the site.
+*/
+
+
+/* importing styles used on every page into here */
+@import url("style-icons.css");
+@import url("style-footer.css");
+@import url("style-navbar.css");
+@import url("style-fonts.css");
+
+/* site-wide consts */
+:root {
+    --primary-color: rgb(217,25,46);
+    --secondary-color: rgb(0,40,93);
+    --tertiary-color: rgb(215,171,58);
+    --background-color: rgb(215, 222, 225);
+    --background-border-color: rgb(190, 195, 200);
+    --footer-color: #333333;
+
+    --text-color: black;
+    --secondary-text-color: aliceblue;
+
+    --primary-hover-color: rgb(255, 50, 74);
+    --secondary-hover-color: rgb(20, 70, 140);
+
+    --box-primary-color: rgb(0,40,93, 35%);
+    --box-primary-color-hover: rgb(0,40,93, 60%);
+    --box-secondary-color: rgb(217,25,46, 35%);
+    --box-secondary-color-hover: rgb(217,25,46, 60%);
+    --box-tertiary-color: rgb(215,171,58, 35%);
+    --box-tertiary-color-hover: rgb(215,171,58, 60%);
+    --box-background-color: rgb(190, 195, 200, 35%);
+
+    /* padding space for content so it doesn't hit far edges of screen */
+    --page-gutter: clamp(1rem, 10vw, 10rem);
+}
+
+* {
+    /* make elements go all the way to the edge */
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+
+    /* site-wide font */
+    font-family: 'Fira Sans', sans-serif;
+}
+
+/* page frame: navbar, main and footer stacked in a column.
+   A flex column (not a grid) so wide content inside main can't stretch the page
+   sideways - flex items only refuse to shrink below their content along the
+   column direction (height), not across it (width). */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* main takes up any spare height, so the footer stays at the bottom of short pages */
+main {
+    flex-grow: 1;
+}
+
+main img {
+    height: auto;
+    max-width: 100%;
+}
+
+p,
+dl,
+h1,
+h2,
+h3,
+ul,
+ol {
+    margin: auto var(--page-gutter);
+    list-style-position: inside;
+    overflow-wrap: break-word;
+
+}
+
+/* scaling fonts with screen size */
+h1 {
+    font-size: clamp(2rem, 1vw, 3rem);
+    font-weight: bold;
+    line-height: 1.15;
+}
+
+h2 {
+    font-size: clamp(1.25rem, 1vw, 1.5rem);
+}
+
+/* mobile devices use 1 col only */
+.definition {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.2rem 2rem;
+}
+
+.definition dt {
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+/* larger screens than phone use two columns, key right-aligned against  value */
+@media (min-width: 481px) {
+    .definition {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .definition dt {
+        font-weight: normal;
+        margin-top: 0;
+        text-align: right;
+    }
+}
+
+.photo-border {
+    border: 0.25rem double var(--primary-color);
+    padding: clamp(0.5rem, 2vw, 1.25rem);
+}
+
+.button-link {
+    background-color: var(--primary-color);
+    border-color: transparent;
+    border-radius: 0.3125rem;
+    color: var(--secondary-text-color);
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
+    text-align: center;
+    text-decoration: none;
+}
+
+.button-link:hover {
+    background-color: var(--primary-hover-color);
+}
+
+/* secondary action ie cancel colour */
+.button-secondary {
+    background-color: var(--secondary-color);
+}
+
+.button-secondary:hover {
+    background-color: var(--secondary-hover-color);
+}
+
+/* wide content scrolls horizontally instead of widening the whole page
+   orders and timetable need this as they can get really large */
+.table-scroll {
+    margin: var(--page-gutter);
+    max-width: 100%;
+    overflow-x: auto; /* add scrollbar if content is too wide */
+}
+
+/* dont let preformatted text overflow viewport */
+pre {
+    margin: var(--page-gutter);
+    overflow-x: auto;
+}
+
+.center-container {
+    display: grid;
+    place-items: center;
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+/* no matter what the hidden attribute MUST be obeyed. my js is not working without this!
+https://css-tricks.com/the-hidden-attribute-is-visibly-weak/ 
+without !important it does nothing... why??? cart-remove button won't f-ing hide otherwise! */
+[hidden] {
+    display: none !important;
+}

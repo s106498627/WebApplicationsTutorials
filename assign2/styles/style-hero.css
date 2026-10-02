@@ -1,0 +1,38 @@
+/*
+filename: style-hero.css
+author: Charles Hutcheson
+created: 2026-08-30
+last modified: 2026-09-26
+description: styles the homepage hero banner, used in index.html
+*/
+
+.hero {
+    /* background img is 2000x751, to make sure the hero keeps that aspect ratio need to provide this.
+     * background-image cannot provide this normally. 
+     */
+    aspect-ratio: 2000 / 751; 
+    background-image: url("images/sandisk_hero.png");
+    background-position: center;
+    background-size: cover;
+    color: var(--secondary-text-color);
+    display: flex;
+    /* caption sits along the bottom edge of the image */
+    align-items: flex-end;
+    /* on narrow screens the 2000/751 ratio is too short for the caption, so keep a minimum height */
+    min-height: 16rem;
+    /* wide and soft shadow to help legibility, meant to blend into the gradient effect */
+    text-shadow: 0.625rem 0 3rem #000000;
+    width: 100%;
+}
+
+/* in normal flow (not absolutely positioned) so the box grows with its text
+   instead of the heading spilling out of the image on small screens */
+.hero-box {
+    background: linear-gradient(rgb(0, 0, 0, 0%), rgb(0, 0, 0, 60%));
+    padding-block: 2rem 1rem;
+    width: 100%;
+}
+
+.hero-box h1 {
+    font-size: clamp(1.75rem, 1rem + 3.5vw, 3rem);
+}

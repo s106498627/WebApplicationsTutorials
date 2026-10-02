@@ -1,0 +1,254 @@
+/*
+filename: style-cart.css
+author: Charles Hutcheson
+created: 2026-09-26
+last modified: 2026-09-26
+description: used by shopping cart on enquire.html
+*/
+
+.cart {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+/* overrides the generic `form div` flex rule in style-form.css */
+form .cart-list {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+}
+
+.cart-card {
+    border: 2px solid var(--primary-color);
+    border-radius: 0.25rem;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+}
+
+/* rows below set flex-direction explicitly: style-form.css stacks `form div` vertically on phones */
+form .cart-card-header {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-height: 2.5rem;
+}
+
+.cart-card .cart-card-title {
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.009em;
+    margin: 0;
+}
+
+/* small uppercase-free label above a control group (M3 "label medium") */
+.cart-card .cart-label {
+    color: var(--footer-color);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    margin: 0;
+}
+
+.icon-button {
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    color: var(--footer-color);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 1.5rem;
+    height: 2.5rem;
+    justify-content: center;
+    width: 2.5rem;
+}
+
+.icon-button:hover {
+    background-color: var(--box-background-color);
+}
+
+.icon-button:active {
+    background-color: var(--background-border-color);
+}
+
+.icon-button:focus-visible {
+    outline: 0.1875rem solid var(--primary-color);
+    outline-offset: 0.125rem;
+}
+
+
+form .cart-card-group {
+    /* stretch so every chip in a row is as tall as the tallest */
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* overrides `form div>label` and `fieldset label` in style-form.css */
+form .cart-card-group .cart-card-group-item {
+    cursor: pointer;
+    display: flex;
+    flex: 1 1 10rem;
+    font-weight: normal;
+    position: relative;
+}
+
+/* radio stays in the tab order and keyboard-operable, but is visually replaced by the chip body */
+.cart-card-group-item input {
+    height: 0.0625rem;
+    opacity: 0;
+    position: absolute;
+    width: 0.0625rem;
+}
+
+.cart-card-group-item-body {
+    border: 0.0625rem solid var(--background-border-color);
+    border-radius: 0.5rem;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.125rem;
+    padding: 0.625rem 0.75rem;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.cart-card-group-item-name {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.cart-card-group-item-price {
+    color: var(--footer-color);
+    font-size: 0.8125rem;
+}
+
+.cart-card-group-item:hover .cart-card-group-item-body {
+    background-color: var(--box-background-color);
+}
+
+/* selected radio button colours. :has(input:checked) -> child node has a checked radio btn*/
+.cart-card-group-item:has(input:checked) .cart-card-group-item-body {
+    background-color: var(--box-secondary-color);
+    border-color: var(--box-secondary-color);
+}
+
+.cart-card-group-item:has(input:checked) .cart-card-group-item-name::before {
+    content: "\e5ca"; /* tick mark in google font */
+    font-family: "Google Icons";
+}
+
+/* outline the product when its radio button is reached with the Tab key */
+.cart-card-group-item:has(input:focus) .cart-card-group-item-body {
+    outline: 0.2rem solid var(--primary-color);
+}
+
+form .cart-field-row {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    /* room for the labels that sit on the top border */
+    padding-top: 0.5rem;
+}
+
+/* overrides `form div>label` in style-form.css */
+form .cart-field-row .cart-field {
+    display: block;
+    flex: 1 1 8rem;
+    font-weight: normal;
+    position: relative;
+}
+
+form .cart-field-row .cart-field-quantity {
+    flex: 0 1 10 rem;
+}
+
+.cart-field input,
+.cart-field select {
+    appearance: none;
+    background-color: transparent;
+    border: 0.0625rem solid var(--background-border-color);
+    border-radius: 0.25rem;
+    color: var(--text-color);
+    font-size: 1rem;
+    height: 3.5rem;
+    padding: 0 1rem;
+    width: 100%;
+}
+
+/* the label sits in a notch on the top border; its background matches .cart-card so it hides the line */
+.cart-field-label {
+    color: var(--text-color);
+    font-size: 0.75rem;
+    left: 0.75rem;
+    padding: 0 0.25rem;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+}
+
+.cart-field:focus .cart-field-label {
+    color: var(--primary-color);
+}
+
+/* show erroneous fields when part2.js signals non-validity */
+.cart-field.is-invalid input,
+.cart-field.is-invalid select {
+    border-color: var(--primary-color);
+}
+
+.cart-card-group.is-invalid .cart-card-group-item-body {
+    border-color: var(--primary-color);
+}
+
+/* add item button*/
+.cart-add {
+    align-items: center;
+    background-color: transparent;
+    border: 0.125rem dashed var(--background-border-color);
+    border-radius: 0.75rem;
+    color: var(--primary-color);
+    cursor: pointer; /* show pointer cursor to show you can click this */
+    display: flex;
+    font-size: 0.875rem;
+    font-weight: 500;
+    gap: 0.75rem;
+    justify-content: center;
+    min-height: 5rem;
+    padding: 1rem;
+    transition: background-color 0.15s ease, border-color 0.15s ease; /* transition to hover colours */
+}
+
+.cart-add:hover {
+    background-color: var(--box-background-color);
+    border-color: var(--primary-color);
+}
+
+/* add outline when tab over to add button */
+.cart-add:focus {
+    outline: 0.2rem solid var(--primary-color);
+    outline-offset: 0.1rem;
+}
+
+/* put box around plus icon */
+.cart-add-icon {
+    align-items: center;
+    background-color: var(--box-secondary-color);
+    border-radius: 1rem;
+    color: var(--text-color);
+    display: flex; /* vertical centering */
+    font-size: 2rem;
+    height: 3rem;
+    justify-content: center; /* horizontal centering */
+    width: 3rem;
+}

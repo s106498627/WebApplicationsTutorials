@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Discover the very best in flash storage at Sandish">
+    <meta name="keywords" content="Sandish, Flash, Storage, USB">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style-form.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.png">
+    <script src="scripts/part2.js"></script>
+    <script src="scripts/enhancements.js"></script>
+    <title>Payment</title>
+</head>
+
+<body>
+    <!-- BEGIN Nav Bar -->
+    <nav class="navbar">
+        <a href="index.html">
+            <!-- limit height to stay in bounds of navbar -->
+            <img src="images/sandish_logo.png" alt="Sandish logo, press to home." height="30">
+        </a>
+
+        <div class="navbar-link-group">
+            <a class="button-link" href=".">Home</a>
+            <a class="button-link" href="product.html">Products</a>
+            <a class="button-link" href="enquire.html">Enquire</a>
+            <a class="button-link" href="enquire2.html">Enquire 2</a>
+            <a class="button-link" href="about.html">About</a>
+            <a class="button-link" href="enhancements.html">Enhancements</a>
+            <a class="button-link" href="enhancements2.html">Enhancements 2</a>
+        </div>
+    </nav>
+    <!-- END Nav Bar -->
+    <main>
+        <br>
+        <h1>Payment</h1>
+
+        <!-- redirect to enquire page when nothing is in localStorage -->
+        <p id="no-order" class="error-box" hidden>
+            No order found. Please <a href="enquire.html">complete the order form</a> first.
+        </p>
+
+        <!-- BEGIN Order summary -->
+        <section id="order-summary" class="summary">
+            <h2>Your details</h2>
+            <dl class="definition">
+                <dt>Name</dt>
+                <dd id="confirm-name"></dd>
+                <dt>Email</dt>
+                <dd id="confirm-email"></dd>
+                <dt>Phone</dt>
+                <dd id="confirm-phone"></dd>
+                <dt>Billing address</dt>
+                <dd id="confirm-address"></dd>
+                <dt>Preferred contact</dt>
+                <dd id="confirm-contact"></dd>
+                <dt>Comment</dt>
+                <dd id="confirm-comment"></dd>
+            </dl>
+
+            <h2>Your order</h2>
+            <!-- wide tables scroll sideways if too small -->
+            <div class="table-scroll">
+                <table id="cart-summary" class="cart-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Storage</th>
+                            <th scope="col">Unit price</th>
+                            <th scope="col">Qty</th>
+                            <th scope="col">Line total</th>
+                        </tr>
+                    </thead>
+                    <!-- one row per cart item -->
+                    <tbody id="cart-rows"></tbody>
+                    <tfoot>
+                        <tr>
+                            <th scope="row" colspan="4">Order extras</th>
+                            <td id="confirm-extras"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" colspan="4">Total</th>
+                            <td id="confirm-total" class="total"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+        <!-- END Order summary -->
+
+        <!-- validation done by scripts/part2.js -->
+        <form id="payment-form" action="https://mercury.swin.edu.au/it000000/formtest.php" method="post"
+            novalidate>
+            <!-- hide the personal details so that they can be sent with card details -->
+            <input type="hidden" id="h-first-name" name="first-name">
+            <input type="hidden" id="h-last-name" name="last-name">
+            <input type="hidden" id="h-email" name="email">
+            <input type="hidden" id="h-street-address" name="street-address">
+            <input type="hidden" id="h-suburb" name="suburb">
+            <input type="hidden" id="h-state" name="state">
+            <input type="hidden" id="h-postcode" name="postcode">
+            <input type="hidden" id="h-phone" name="phone">
+            <input type="hidden" id="h-preferred-contact" name="preferred-contact">
+            <input type="hidden" id="h-item-count" name="item-count">
+            <!-- cart items here from js -->
+            <div id="h-cart-items" hidden></div>
+            <input type="hidden" id="h-extras" name="extras">
+            <input type="hidden" id="h-comment" name="comment">
+            <input type="hidden" id="h-total-cost" name="total-cost">
+
+            <div class="form-col">
+                <fieldset>
+                    <legend>Card details</legend>
+                    <div>
+                        <label for="card-type">Card type</label>
+                        <!-- no valid default: the placeholder option has an empty value -->
+                        <select id="card-type" name="card-type">
+                            <option value="" selected>-- Choose a card --</option>
+                            <option value="visa">Visa</option>
+                            <option value="mastercard">Mastercard</option>
+                            <option value="americanExpress">American Express</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="card-name">Name on card</label>
+                        <div class="field">
+                            <input type="text" id="card-name" name="card-name">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="card-number">Card number</label>
+                        <div class="field">
+                            <input type="text" id="card-number" name="card-number" inputmode="numeric">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="card-expiry">Expiry (MM-YY)</label>
+                        <div class="field">
+                            <input type="text" id="card-expiry" name="card-expiry" placeholder="MM-YY">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="card-cvv">CVV</label>
+                        <div class="field">
+                            <input type="text" id="card-cvv" name="card-cvv" inputmode="numeric">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- combined validation messages are written here by scripts/part2.js -->
+                <div id="payment-errors" class="error-box" hidden></div>
+
+                <div class="button-row">
+                    <button type="submit" id="check-out" class="button-link">Check Out</button>
+                    <button type="button" id="cancel-order" class="button-link button-secondary">Cancel Order</button>
+                </div>
+            </div>
+        </form>
+    </main>
+    <!-- START footer -->
+    <footer>
+        &copy; 2026 Sandish Pty Ltd.
+    </footer>
+    <!-- END footer -->
+</body>
+
+</html>

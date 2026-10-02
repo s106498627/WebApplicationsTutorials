@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Discover the very best in flash storage at Sandish">
+    <meta name="keywords" content="Sandish, Flash, Storage, USB">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.png">
+    <script src="scripts/enhancements.js"></script>
+    <title>Enhancements 2</title>
+</head>
+
+<body>
+    <!-- BEGIN Nav Bar -->
+    <nav class="navbar">
+        <a href="index.html">
+            <!-- limit height to stay in bounds of navbar -->
+            <img src="images/sandish_logo.png" alt="Sandish logo, press to home." height="30">
+        </a>
+
+        <div class="navbar-link-group">
+            <a class="button-link" href=".">Home</a>
+            <a class="button-link" href="product.html">Products</a>
+            <a class="button-link" href="enquire.html">Enquire</a>
+            <a class="button-link" href="enquire2.html">Enquire 2</a>
+            <a class="button-link" href="about.html">About</a>
+            <a class="button-link" href="enhancements.html">Enhancements</a>
+            <a class="button-link" href="enhancements2.html">Enhancements 2</a>
+        </div>
+    </nav>
+    <!-- END Nav Bar -->
+
+    <main>
+        
+        <br>
+        <h1>
+            JavaScript Enhancements
+        </h1>
+        <br>
+        <h2>
+            The Cart
+        </h2>
+        <p>
+            I was inspired to make <a href="enquire.html">the cart</a> act this way from an app called OpenNutriTracker, which keeps a daily list of what you eat. In this app you add items with the + icon and it opens a submenu for all sorts of options. I was able to recreate this in a simple way in the cart. I thought it appropriate as there are only 3 products, so the selection process is simple. I use the HTML itself to keep track of how many items were in the cart via the number of `cart-item` divs by <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByClassName">getElementByClassName</a>, and then I use this to renumber the items in the cart when one is deleted. This way I do not have to track the cart in JS and replicate it in the HMTL, ie 2 points of failure rather than 1. The cart items are implemented as a template, which the JS copies when the add item button is pressed. The remove button also hides when there is 1 item in the cart. I had particular problem with this because no matter what I did, the remove button would not hide when there was only 1 item in the cart. I found <a href="https://css-tricks.com/the-hidden-attribute-is-visibly-weak/ ">this article</a> which explained the hidden attribute is "visibly weak" and must be overridden with <code>display: none !important</code> in CSS. Feels like a bit of a hack to me, but it does work.
+
+            The tricky part was getting all the fields to renumber correctly when an item was deleted. I had to use the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector">querySelector</a>> method to find a <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/How_to/Use_data_attributes">data-field</a> (data-* is reserved for programmer-defined attributes to carry information) I placed in each of the inputs for each cart item so I could change the name attribute to match the new number.
+        </p>
+        <br>
+        <h2>
+            VueJS Rewrite of the Enquire Form
+        </h2>
+        <br>
+        <p>
+            I rewrote the <a href="enquire2.html">enquire form using VueJS</a>. I work full-time as a Software Engineer and use VueJS somewhat frequently at work (my team is primarily working on the core engine) so I felt comfortable using it for this enhancement. I used the <a href="https://vuejs.org/guide/essentials/forms.html">VueJS forms guide</a> as a basis for my new form. Using v-model was a very handy technique to pass through JS variables and update them on the fly without having to go through the lengthy document.getElementBy* each time you wanted an up-to-date view of the input. I alo used the <a href="https://vuejs.org/guide/essentials/event-handling.html">VueJS event handling guide</a> to learn how to handle submit events in the exact way needed for the enhancement.
+
+            As most websites use VueJS or ReactJS these days, I thought this was a good enhancement to make. It was interesting to see how I can integrate new-age web technology on a more classical LAMP stack website. The other clear advantage of this is I can use TypeScript, which is essentially JavaScript with strict types. I despise dynaic typing because of the implicit type casting that causes a multitude of hard to find bugs as well as the IDE engine not being able to deduct the type meaning I cannot use code completion, and I was happy with the speed at which I could write TypeScript opposed to JavaScript.
+    </main>
+
+    <!-- START footer -->
+    <footer>
+        &copy; 2026 Sandish Pty Ltd.
+    </footer>
+    <!-- END footer -->
+</body>
+
+</html>

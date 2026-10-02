@@ -1,0 +1,53 @@
+/*
+filename: style-navbar.css
+author: Charles Hutcheson
+created: 2026-08-30
+last modified: 2026-09-26
+description: styles the site navbar, imported by style.css into every page
+*/
+
+.navbar {
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    background-color: var(--primary-color);
+    color: var(--secondary-text-color);
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-link-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+/* mobile bp links drop onto their own row under the logo and share the width evenly */
+@media (max-width: 480px) {
+    .navbar {
+        justify-content: center;
+    }
+
+    .navbar-link-group {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .navbar-link-group .button-link {
+        flex: 1 1 auto;
+        font-size: 0.875rem;
+        padding: 0.4rem 0.5rem;
+    }
+}
+
+
+.navbar-link-item:hover {
+    background-color: var(--primary-hover-color);
+    border-radius: 0.3125rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+}

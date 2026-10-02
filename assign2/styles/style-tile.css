@@ -1,0 +1,73 @@
+/*
+filename: style-tile.css
+author: Charles Hutcheson
+created: 2026-08-30
+last modified: 2026-09-26
+description: styles the product tiles in the grid layout, used in product.html
+*/
+
+/* mobile first: tiles stacked, FAQ underneath */
+.product-layout {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    margin: 2rem var(--page-gutter);
+    /* tiles keep their own height instead of stretching to match the FAQ sidebar */
+    align-items: start;
+}
+
+.tile-group {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+}
+
+/* tablet: two tiles per row, FAQ still underneath */
+@media (min-width: 481px) {
+    .tile-group {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* desktop: FAQ moves into a sidebar beside a three-across tile grid */
+@media (min-width: 1025px) {
+    .product-layout {
+        grid-template-columns: 3fr 1fr;
+    }
+
+    .tile-group {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+.tile {
+    border: 0.125rem solid var(--primary-color);
+    border-radius: 0.3125rem;
+    list-style-position: inside;
+    padding: 1rem;
+}
+
+.tile ul,
+.tile ol,
+.tile h2 {
+    margin: 0;
+    width: 100%;
+}
+
+.tile:hover {
+    border-color: var(--primary-hover-color);
+}
+
+.tile h2 {
+    margin-bottom: 0.5rem;
+}
+
+.tile img {
+    transition: transform 0.2s ease-in-out;
+}
+
+.tile:hover img,
+.tile:focus-within img {
+    transform: scale(1.1);
+}

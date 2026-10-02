@@ -1,0 +1,228 @@
+/*
+filename: style-form.css
+author: Charles Hutcheson
+created: 2026-08-30
+last modified: 2026-09-26
+description: styles the order forms, used in enquire.html and payment.html.
+*/
+
+form {
+    align-items: start;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    margin: 2rem auto;
+    
+    width: 80%;
+}
+
+form div {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    width: 100%;
+}
+
+/* > to capture first level child labels only. checkbox labels overflow without this.
+   https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Selectors#Combinators */
+form div>label {
+    flex: 0 0 auto;
+    font-weight: bold;
+}
+
+.field {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+/* text inputs, selects and textareas fill column */
+.field input,
+.field select,
+form div>select,
+form textarea {
+    border: 0.0625rem solid var(--background-border-color);
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    min-height: 2.5rem;
+    padding: 0.4rem 0.6rem;
+    width: 100%;
+}
+
+.field input:focus,
+form div>select:focus,
+form textarea:focus {
+    border-color: var(--primary-color);
+    outline: 0.125rem solid var(--primary-color);
+    outline-offset: 0;
+}
+
+/* groups the fields of one side of the form */
+.form-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 0;
+    width: 100%;
+}
+
+form textarea {
+    min-height: 6rem;
+    resize: vertical;
+}
+
+fieldset {
+    border: 0.125rem solid var(--primary-color);
+    border-radius: 0.3125rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0;
+    padding: 1rem;
+    width: 100%;
+}
+
+legend {
+    font-weight: bold;
+    padding: 0 0.5rem;
+}
+
+/* checkbox and radiobox label styling */
+fieldset label {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+
+fieldset select {
+    width: 100%;
+}
+
+/* make submit button bigger */
+form button[type="submit"],
+.button-row .button-link {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    width: 100%;
+}
+
+form .button-row {
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.error-box {
+    background-color: rgb(217, 25, 46, 8%);
+    border: 0.125rem solid var(--primary-color);
+    border-radius: 0.25rem;
+    flex-direction: column; /* overrides flex dir -> row from parent */
+    color: var(--text-color);
+    padding: 0.75rem 1rem;
+}
+
+.error-box ul {
+    margin: 0.5rem 0 0 0;
+    list-style-position: outside;
+    padding-left: 1.25rem;
+}
+
+p.error-box {
+    margin: 1rem var(--page-gutter);
+}
+
+#payment-form {
+    width: min(80%, 50rem);
+}
+
+.summary {
+    margin: 1rem auto;
+    width: min(80%, 50rem);
+}
+
+.summary h2 {
+    margin: 1.5rem 0 0.75rem;
+}
+
+.summary .definition,
+.summary .table-scroll {
+    margin-inline: 0;
+}
+
+.cart-table {
+    border-collapse: collapse;
+    /* so on small phones tbl doesnt exceed viewport bounds */
+    min-width: 30rem;
+    width: 100%;
+}
+
+.cart-table th,
+.cart-table td {
+    border-bottom: 0.0625rem solid var(--background-border-color);
+    padding: 0.5rem;
+    text-align: left;
+}
+
+/* numeric comls should align right */
+/* from 3rd elem onwards to tbl end */
+.cart-table td:nth-child(n+3),
+.cart-table thead th:nth-child(n+3),
+.cart-table tfoot td {
+    text-align: right;
+}
+
+.cart-table tfoot th {
+    text-align: right;
+}
+
+/* make total larger and more visible */
+.cart-table .total {
+    font-size: 1.125rem;
+    font-weight: bold;
+}
+
+/* breakpoint for tablet size devices */
+@media (min-width: 481px) {
+
+    /* label beside its input */
+    form div {
+        align-items: flex-start;
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    form div>label {
+        flex: 0 0 9rem;
+        /* line the label text up with the text inside the input */
+        padding-top: 0.5rem;
+    }
+
+    /* buttons size to their text and sit side by side */
+    form button[type="submit"],
+    .button-row .button-link {
+        width: auto;
+    }
+
+    form .button-row {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+/* breakpoint for full-size screen */
+@media (min-width: 1025px) {
+
+    /* two columns side by side, but a form with only one .form-col ie product page stays one column because auto-fit collapses the empty cols */
+    form {
+        /* create as many columns as will fit on screen (repeat) and at least 24 rem wide (minmax). see https://www.youtube.com/watch?v=OZ6qKoq7RJU&t=12 */
+        grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+    }
+}
+
+/* error box needs to override the global margin, it doesnt neeed so much space around the content */
+.error-box p {
+    margin: 0;
+}

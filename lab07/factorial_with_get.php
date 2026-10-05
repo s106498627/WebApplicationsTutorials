@@ -15,6 +15,6 @@
         } else {
             echo "<p>Please enter a positive integer.</p>";
         }
-        echo "<p><a href='factorial.html'>Return to the entry page</a></p>";
+        echo "<p><a href='factorial.php'>Return to the entry page</a></p>";
     ?>
 </body>

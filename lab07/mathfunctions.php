@@ -6,7 +6,7 @@
 */
  
 
-function factorial($n) {	// declare the factorial function
+function factorial(int $n): float {	// declare the factorial function
 	$result = 1;		// declare and initialise the result variable
 	$factor = $n;		// declare and initialise the factor variable
 	while ($factor > 1) {	// loop to multiple all factors until 1
@@ -16,7 +16,7 @@ function factorial($n) {	// declare the factorial function
 	return $result;
 }
 
-function isPositiveInteger($n) {
+function isPositiveInteger(int $n): bool {
 	if (is_numeric($n) && $n >= 0 && floor($n) == $n) {
 		return true;
 	} else {

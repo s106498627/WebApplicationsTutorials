@@ -4,6 +4,3 @@
 	$pwd = "letmein"; // your password (date of birth ddmmyy unless changed)
 	$sql_db = "s106498627_db"; // your database
 ?>
-	
-	
-	

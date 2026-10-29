@@ -1,0 +1,25 @@
+/*
+filename: style-faq.css
+author: Charles Hutcheson
+created: 2026-09-05
+last modified: 2026-09-26
+description: styles the FAQ aside, used in product.html
+*/
+
+#faq {
+    border: 0.125rem solid var(--primary-color);
+    border-radius: 0.3125rem;
+    padding: 1rem;
+    height: fit-content;
+}
+
+/* the box already has padding, so drop the page gutter the global h3/dl rule adds */
+#faq h3,
+#faq dl {
+    margin-inline: 0;
+}
+
+#faq dt {
+    font-weight: bold;
+    padding-top: 1rem;
+}

@@ -1,0 +1,67 @@
+/*
+filename: style-timetable.css
+author: Charles Hutcheson
+created: 2026-09-04
+last modified: 2026-09-26
+description: styles the timetable, used in about.html
+*/
+
+.timetable {
+    width: 100%;
+    background-color: var(--box-background-color);
+    border-collapse: collapse;
+    max-width: 50rem;
+    /* keep columns readable on phones; the .table-scroll wrapper scrolls it sideways */
+    min-width: 34rem;
+    /* centred here rather than by a grid parent, so the scroll box can reach both edges */
+    margin-inline: auto;
+    /* even out the column widths */
+    table-layout: fixed;
+    text-align: center; /* all text on table is centered */
+}
+
+.timetable th {
+    background-color: var(--box-background-color);
+    color: black;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    padding: clamp(0.5rem, 1.5vw, 1rem);
+    border: 0.0625rem solid black;
+}
+
+.timetable td, tbody {
+    border: 0.0625rem solid black;
+}
+
+/* Time column accent - match table head */
+.timetable td:first-child {
+    background-color: var(--box-background-color);
+    color: black;
+}
+
+/* Colors for different subjects */
+.timetable .work {
+    background: var(--box-primary-color);
+}
+
+.timetable .work:hover {
+    background: var(--box-primary-color-hover);
+}
+
+.timetable .webapp {
+    background: var(--box-secondary-color);
+}
+
+.timetable .webapp:hover {
+    background: var(--box-secondary-color-hover);
+}
+
+.timetable .data {
+    background: var(--box-tertiary-color);
+}
+
+.timetable .data:hover {
+    background: var(--box-tertiary-color-hover);
+}

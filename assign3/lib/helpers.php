@@ -1,5 +1,15 @@
 <?php
 
+// php 5 warns on every date function if the server has no date.timezone set, and that warning
+// gets printed before header() so redirects break
+date_default_timezone_set("Australia/Melbourne");
+
+$PRODUCT_NAMES = [ // to convert db codes to displayable test
+    "pokemon-usb" => "Pokemon USB Drive",
+    "extreme-usb" => "Extreme Encrypted USB Drive",
+    "classic-usb-a" => "Classic USB-A Drive"
+];
+
 // remove whitespace and escape html to avoid xss
 function sanitise_input($data) {
     $data = trim($data);
@@ -61,4 +71,37 @@ function get_item_count() {
         $itemCount++;
     }
     return $itemCount;
+}
+
+// get the cheapest price of a major product SKU
+function from_price($prices, $product) {
+    if (!isset($prices[$product]) || count($prices[$product]) === 0) {
+        return "";
+    }
+    return "From $" . number_format(min($prices[$product]), 2);
+}
+
+// get extras price and format for display
+function extra_price($extraPrices, $extra) {
+    if (!isset($extraPrices[$extra])) {
+        return "";
+    }
+    return " ($" . number_format($extraPrices[$extra], 2) . ")";
+}
+
+// gen the attribute for the price of the SKU of the product to give to cart js
+function sku_price_attrs($prices, $capacity) {
+    $attrs = "";
+    foreach ($prices as $product => $capacities) {
+        if (isset($capacities[$capacity])) {
+            $attrs .= ' data-price-' . $product . '="' . $capacities[$capacity] . '"';
+        }
+    }
+    return $attrs;
+}
+
+// get display name for product, or just show the DB name jsut to show anything and not error
+function product_name($product) {
+    global $PRODUCT_NAMES; // functions can't see globals unless they're pulled in
+    return isset($PRODUCT_NAMES[$product]) ? $PRODUCT_NAMES[$product] : $product;
 }

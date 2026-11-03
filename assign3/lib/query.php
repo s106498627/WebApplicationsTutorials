@@ -108,9 +108,10 @@ function create_order($conn, $customer, $card, $items, $extras, $comment) {
         } else {
             $productId = $product["product_id"];
             if (!isset($quantities[$productId])) {
-                $quantities[$productId] = 0; // didn't select that product
+                $quantities[$productId] = 0; // first line for this product
             }
-            $quantities[$productId] = (int)$item["quantity"];
+            // add rather than set, the same product can be in the cart on more than one line
+            $quantities[$productId] += (int)$item["quantity"];
             $total += $product["price"] * (int)$item["quantity"]; // running count on total price
         }
     }
@@ -193,8 +194,19 @@ function get_order($conn, $orderId) {
         return false;
     }
 
-    // add items ordered to the order map
-    $order["items"] = [];
+    $order["items"] = get_order_items($conn, $orderId);
+    $order["extras"] = get_order_extras($conn, $orderId);
+    if ($order["items"] === false || $order["extras"] === false) {
+        return false;
+    }
+
+    return $order;
+}
+
+// get the products on an order with their quantities, or false if any errors
+function get_order_items($conn, $orderId) {
+    $orderId = (int)$orderId;
+
     $result = mysqli_query($conn, "SELECT p.product_id, p.product, p.capacity, p.price, oi.quantity
         FROM order_items oi JOIN products p ON oi.product_id = p.product_id
         WHERE oi.order_id = '$orderId'");
@@ -202,24 +214,194 @@ function get_order($conn, $orderId) {
         return false;
     }
     // keep grabbing rows until we run out of hits
+    $items = [];
     while ($row = mysqli_fetch_assoc($result)) {
-        $order["items"][] = $row;
+        $items[] = $row;
     }
     mysqli_free_result($result);
 
-    // add extras to order map
-    $order["extras"] = [];
+    return $items;
+}
+
+// get the extras chosen on an order, or false if any errors
+function get_order_extras($conn, $orderId) {
+    $orderId = (int)$orderId;
+
     $result = mysqli_query($conn, "SELECT e.extra_id, e.extra_name, e.price
         FROM order_extras oe JOIN extras e ON oe.extra_id = e.extra_id
         WHERE oe.order_id = '$orderId'");
     if (!$result) {
         return false;
     }
+    $extras = [];
     while ($row = mysqli_fetch_assoc($result)) {
-        $order["extras"][] = $row;
+        $extras[] = $row;
     }
     mysqli_free_result($result);
 
-    return $order;
+    return $extras;
 }
 
+// get the unique product skus that exist, for the manager's product filter
+function get_product_names($conn) {
+    $result = mysqli_query($conn, "SELECT DISTINCT product FROM products ORDER BY product");
+    if (!$result) {
+        return false;
+    }
+    $products = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $products[] = $row["product"];
+    }
+    mysqli_free_result($result);
+
+    return $products;
+}
+
+// price of every product and capacity combination for cart $prices[product][capacity] = price
+// returns false if any errors
+function get_product_prices($conn) {
+    $result = mysqli_query($conn, "SELECT product, capacity, price FROM products");
+    if (!$result) {
+        return false;
+    }
+    $prices = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $prices[$row["product"]][$row["capacity"]] = $row["price"];
+    }
+    mysqli_free_result($result);
+
+    return $prices;
+}
+
+// get_product_prices for the cart and payment pages. empty if the db is down so page can render w/o prices
+// doesn't close $conn so it can be reused, the page closes it
+function load_product_prices($conn) {
+    if (!$conn) {
+        return [];
+    }
+    $prices = get_product_prices($conn);
+    return $prices === false ? [] : $prices;
+}
+
+// price of every extra for the cart, as $prices[extra_name] = price. returns false if any errors
+function get_extra_prices($conn) {
+    $result = mysqli_query($conn, "SELECT extra_name, price FROM extras");
+    if (!$result) {
+        return false;
+    }
+    $prices = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $prices[$row["extra_name"]] = $row["price"];
+    }
+    mysqli_free_result($result);
+
+    return $prices;
+}
+
+// get_extra_prices, empty if the db is down and doesn't close $conn, same as load_product_prices
+function load_extra_prices($conn) {
+    if (!$conn) {
+        return [];
+    }
+    $prices = get_extra_prices($conn);
+    return $prices === false ? [] : $prices;
+}
+
+// search orders for the manager page. filters are optional, empty string = dont filter.
+// $sort is has to be 1 of `date_` or `cost_` + `asc` or `desc`.
+function search_orders($conn, $firstName, $lastName, $product, $status, $sort) {
+    // whitelist of sorts so the ORDER BY can't be injected
+    $ORDER_SORTS = [
+        "date_desc" => "o.order_time DESC",
+        "date_asc" => "o.order_time ASC",
+        "cost_desc" => "o.order_cost DESC",
+        "cost_asc" => "o.order_cost ASC"
+    ];
+    $orderBy = isset($ORDER_SORTS[$sort]) ? $ORDER_SORTS[$sort] : $ORDER_SORTS["date_desc"]; // provide usable default
+
+    // build up the where clause from whichever filters were given
+    $where = [];
+    if ($firstName !== "") {
+        // partial matches
+        $firstName = mysqli_real_escape_string($conn, $firstName);
+        $where[] = "c.first_name LIKE '%$firstName%'";
+    }
+    if ($lastName !== "") {
+        $lastName = mysqli_real_escape_string($conn, $lastName);
+        $where[] = "c.last_name LIKE '%$lastName%'";
+    }
+    if ($product !== "") {
+        // orders that have at least one of that product on them
+        $product = mysqli_real_escape_string($conn, $product);
+        $where[] = "o.order_id IN (SELECT oi.order_id FROM order_items oi
+            JOIN products p ON oi.product_id = p.product_id WHERE p.product = '$product')";
+    }
+    if ($status !== "") {
+        $status = mysqli_real_escape_string($conn, strtoupper($status));
+        $where[] = "o.order_status = '$status'";
+    }
+    // implode == string.join() in more serious langs, i like the whimsy: https://www.php.net/manual/en/function.implode.php
+    $whereSql = count($where) > 0 ? "WHERE " . implode(" AND ", $where) : "";
+
+    $result = mysqli_query($conn, "SELECT o.order_id, o.order_time, o.order_cost, o.order_status,
+            c.first_name, c.last_name
+        FROM orders o JOIN customers c ON o.customer_id = c.customer_id
+        $whereSql
+        ORDER BY $orderBy, o.order_id DESC");
+    if (!$result) {
+        return false;
+    }
+    $orders = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $orders[] = $row;
+    }
+    mysqli_free_result($result);
+
+    // attach what was bought in each order
+    foreach ($orders as $i => $order) {
+        $orders[$i]["items"] = get_order_items($conn, $order["order_id"]);
+        $orders[$i]["extras"] = get_order_extras($conn, $order["order_id"]);
+        if ($orders[$i]["items"] === false || $orders[$i]["extras"] === false) {
+            return false;
+        }
+    }
+
+    return $orders;
+}
+
+// change status of order by orderId, returns false if status isnt valid or update failed
+function update_order_status($conn, $orderId, $status) {
+    $orderId = (int)$orderId;
+    $status = strtoupper($status);
+    // check for valid enum options
+    if (!in_array($status, ["PENDING", "FULFILLED", "PAID", "ARCHIVED"], true)) {
+        return false;
+    }
+
+    return mysqli_query($conn, "UPDATE orders SET order_status = '$status' WHERE order_id = '$orderId'");
+}
+
+// remove pending order and rows that reference it
+function cancel_order($conn, $orderId) {
+    $orderId = (int)$orderId;
+
+    $result = mysqli_query($conn, "SELECT order_status FROM orders WHERE order_id = '$orderId' FOR UPDATE");
+    if (!$result) {
+        return false;
+    }
+    $row = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+
+    if (!$row || $row["order_status"] !== "PENDING") {
+        return false; // only pending orders can be cancelled
+    }
+
+    // delete leaves before the trunk
+    if (!mysqli_query($conn, "DELETE FROM order_items WHERE order_id = '$orderId'")
+        || !mysqli_query($conn, "DELETE FROM order_extras WHERE order_id = '$orderId'")
+        || !mysqli_query($conn, "DELETE FROM orders WHERE order_id = '$orderId'")) {
+        return false;
+    }
+
+    return true;
+}

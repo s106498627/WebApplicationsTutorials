@@ -2,6 +2,7 @@
 session_start();
 require_once("lib/helpers.php");
 require_once("lib/validation.php");
+require_once("lib/query.php");
 
 // go back to enter the enquire page again
 function back_to_enquire($errMsgs) {
@@ -27,6 +28,14 @@ $posted = isset($_SESSION["payment_post"]) ? $_SESSION["payment_post"] : [];
 // unbind for next round of validation
 unset($_SESSION["payment_errors"]);
 unset($_SESSION["payment_post"]);
+
+// prices for the order summary, same as the cart shows
+$conn = db_connect();
+$prices = load_product_prices($conn);
+$extraPrices = load_extra_prices($conn);
+if ($conn) {
+    mysqli_close($conn);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,7 +86,9 @@ unset($_SESSION["payment_post"]);
             <h2>Your order</h2>
             <!-- wide tables scroll sideways if too small -->
             <div class="table-scroll">
-                <table id="cart-summary" class="cart-table">
+                <!-- passing price form the db to my jsavascript cart... not rewriting the cart too much effort :( -->
+                <table id="cart-summary" class="cart-table" data-prices="<?php echo htmlspecialchars(json_encode($prices)) ?>"
+                    data-extra-prices="<?php echo htmlspecialchars(json_encode($extraPrices)) ?>">
                     <thead>
                         <tr>
                             <th scope="col">Product</th>

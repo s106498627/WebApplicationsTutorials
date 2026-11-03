@@ -7,23 +7,11 @@ const PRODUCT_NAMES = {
     "classic-usb-a": "Classic USB-A Drive"
 };
 
-const PRODUCT_PRICES = {
-    "pokemon-usb": 29.95,
-    "extreme-usb": 89.95,
-    "classic-usb-a": 14.95
-};
-
 const STORAGE_NAMES = {
     "32gb": "32 GB",
     "64gb": "64 GB",
     "128gb": "128 GB",
     "256gb": "256 GB"
-};
-const STORAGE_PRICES = {
-    "32gb": 0,
-    "64gb": 10,
-    "128gb": 20,
-    "256gb": 35
 };
 
 // optional extras, charged once per order
@@ -31,11 +19,6 @@ const EXTRA_NAMES = {
     "express-shipping": "Express shipping",
     "gift-wrap": "Gift wrapping",
     "extended-warranty": "Extended 3-year warranty"
-};
-const EXTRA_PRICES = {
-    "express-shipping": 9.95,
-    "gift-wrap": 4.00,
-    "extended-warranty": 12.00
 };
 
 // validation is done by payment.php now, so just save the order for the payment page
@@ -120,6 +103,11 @@ function showOrder() {
     document.getElementById("confirm-contact").textContent = contact;
     document.getElementById("confirm-comment").textContent = comment;
 
+    // prices[product][capacity] from the products table, put on the table by payment.php
+    let prices = JSON.parse(document.getElementById("cart-summary").getAttribute("data-prices"));
+    // extraPrices[extra_name] from the extras table
+    let extraPrices = JSON.parse(document.getElementById("cart-summary").getAttribute("data-extra-prices"));
+
     // one table row and three hidden inputs for each cart item
     let itemCount = Number(localStorage.getItem("itemCount"));
     let total = 0;
@@ -132,7 +120,8 @@ function showOrder() {
         let quantity = Number(localStorage.getItem("item" + i + "Quantity"));
 
         // order calcs
-        let unitPrice = PRODUCT_PRICES[product] + STORAGE_PRICES[storage];
+        // 0 if the price couldn't be loaded, process_order works out the real total from the db anyway
+        let unitPrice = prices[product] && prices[product][storage] ? Number(prices[product][storage]) : 0;
         let lineTotal = unitPrice * quantity;
         total = total + lineTotal;
 
@@ -162,7 +151,8 @@ function showOrder() {
 
         extrasText = "";
         for (let i = 0; i < extraList.length; i++) {
-            extrasCost = extrasCost + EXTRA_PRICES[extraList[i]];
+            // 0 if the price couldn't be loaded, same as the items above
+            extrasCost = extrasCost + (extraPrices[extraList[i]] ? Number(extraPrices[extraList[i]]) : 0);
             if (extrasText !== "") {
                 extrasText += ", ";
             }

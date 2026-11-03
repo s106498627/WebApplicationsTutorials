@@ -25,10 +25,31 @@ function renumberItems() {
     return items.length;
 }
 
+// shows the price of each storage size for the product just picked, from the data-price-<product>
+// attributes php put on the options
+function showStoragePrices() {
+    // "this" is the product radio that was picked
+    let options = this.closest(".cart-item").querySelector('[data-field="capacity"]').options;
+
+    for (let i = 0; i < options.length; i++) {
+        if (options[i].value === "") {
+            continue; // "Choose storage"
+        }
+        let price = options[i].getAttribute("data-price-" + this.value);
+        options[i].textContent = STORAGE_NAMES[options[i].value] + (price === null ? "" : " ($" + price + ")");
+    }
+}
+
 // copies the hidden template to make a new item card
 function addItem() {
     let template = document.getElementById("cart-item-template");
     let newItem = template.content.firstElementChild.cloneNode(true);
+
+    // update the storage prices when the product changes
+    let productRadios = newItem.querySelectorAll('[data-field="product"]');
+    for (let i = 0; i < productRadios.length; i++) {
+        productRadios[i].onchange = showStoragePrices;
+    }
 
     // put the new card just before the "Add item" button
     let addButton = document.getElementById("add-item");

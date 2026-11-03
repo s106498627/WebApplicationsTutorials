@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("lib/helpers.php");
+require_once("lib/query.php");
 
 // get back fields and errors from process_order
 $enquireErrors = isset($_SESSION["enquire_errors"]) ? $_SESSION["enquire_errors"] : [];
@@ -8,7 +9,15 @@ $posted = isset($_SESSION["enquire_post"]) ? $_SESSION["enquire_post"] : [];
 
 // reset sendback info for next submission
 unset($_SESSION["enquire_errors"]);
-unset($_SESSION["enquire_post"]); 
+unset($_SESSION["enquire_post"]);
+
+// cart prices come from the products table
+$conn = db_connect();
+$prices = load_product_prices($conn);
+$extraPrices = load_extra_prices($conn);
+if ($conn) {
+    mysqli_close($conn);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -156,33 +165,34 @@ unset($_SESSION["enquire_post"]);
                                 <input type="radio" value="pokemon-usb" data-field="product">
                                 <span class="cart-card-group-item-body">
                                     <span class="cart-card-group-item-name">Pokémon USB Drive</span>
-                                    <span class="cart-card-group-item-price">$29.95</span>
+                                    <span class="cart-card-group-item-price"><?php echo from_price($prices, "pokemon-usb") ?></span>
                                 </span>
                             </label>
                             <label class="cart-card-group-item">
                                 <input type="radio" value="extreme-usb" data-field="product">
                                 <span class="cart-card-group-item-body">
                                     <span class="cart-card-group-item-name">Extreme Encrypted USB Drive</span>
-                                    <span class="cart-card-group-item-price">$89.95</span>
+                                    <span class="cart-card-group-item-price"><?php echo from_price($prices, "extreme-usb") ?></span>
                                 </span>
                             </label>
                             <label class="cart-card-group-item">
                                 <input type="radio" value="classic-usb-a" data-field="product">
                                 <span class="cart-card-group-item-body">
                                     <span class="cart-card-group-item-name">Classic USB-A Drive</span>
-                                    <span class="cart-card-group-item-price">$14.95</span>
+                                    <span class="cart-card-group-item-price"><?php echo from_price($prices, "classic-usb-a") ?></span>
                                 </span>
                             </label>
                         </div>
 
                         <div class="cart-field-row">
                             <label class="cart-field cart-field-select">
+                                <!-- enhancements.js adds the price to each option once a product is picked -->
                                 <select data-field="capacity">
                                     <option value="" selected>Choose storage</option>
-                                    <option value="32gb">32 GB (+$0.00)</option>
-                                    <option value="64gb">64 GB (+$10.00)</option>
-                                    <option value="128gb">128 GB (+$20.00)</option>
-                                    <option value="256gb">256 GB (+$35.00)</option>
+                                    <option value="32gb"<?php echo sku_price_attrs($prices, "32gb") ?>>32 GB</option>
+                                    <option value="64gb"<?php echo sku_price_attrs($prices, "64gb") ?>>64 GB</option>
+                                    <option value="128gb"<?php echo sku_price_attrs($prices, "128gb") ?>>128 GB</option>
+                                    <option value="256gb"<?php echo sku_price_attrs($prices, "256gb") ?>>256 GB</option>
                                 </select>
                                 <span class="cart-field-label">Storage</span>
                             </label>
@@ -200,15 +210,15 @@ unset($_SESSION["enquire_post"]);
                     <legend>Order extras</legend>
                     <label>
                         <input type="checkbox" name="extras[]" value="express-shipping" <?php echo get_checked("extras", $posted, "express-shipping") ?>>
-                        Express shipping ($9.95)
+                        Express shipping<?php echo extra_price($extraPrices, "express-shipping") ?>
                     </label>
                     <label>
                         <input type="checkbox" name="extras[]" value="gift-wrap" <?php echo get_checked("extras", $posted, "gift-wrap") ?>>
-                        Gift wrapping ($4.00)
+                        Gift wrapping<?php echo extra_price($extraPrices, "gift-wrap") ?>
                     </label>
                     <label>
                         <input type="checkbox" name="extras[]" value="extended-warranty" <?php echo get_checked("extras", $posted, "extended-warranty") ?>>
-                        Extended 3-year warranty ($12.00)
+                        Extended 3-year warranty<?php echo extra_price($extraPrices, "extended-warranty") ?>
                     </label>
                 </fieldset>
 

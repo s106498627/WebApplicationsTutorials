@@ -11,8 +11,10 @@
             <a class="button-link" href="enquire.php">Enquire</a>
             <a class="button-link" href="enquire2.php">Enquire 2</a>
             <a class="button-link" href="about.php">About</a>
+            <a class="button-link" href="manager.php">Manager</a>
             <a class="button-link" href="enhancements.php">Enhancements</a>
             <a class="button-link" href="enhancements2.php">Enhancements 2</a>
+            <a class="button-link" href="enhancements3.php">Enhancements 3</a>
         </div>
     </nav>
     <!-- END Nav Bar -->

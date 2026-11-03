@@ -1,12 +1,7 @@
 <?php
 session_start();
+require_once("lib/helpers.php");
 require_once("lib/query.php");
-
-$PRODUCT_NAMES = [ // to convert db codes to displayable test
-    "pokemon-usb" => "Pokemon USB Drive",
-    "extreme-usb" => "Extreme Encrypted USB Drive",
-    "classic-usb-a" => "Classic USB-A Drive"
-];
 
 // only allow the user to view the receipt from their own session
 if (!isset($_SESSION["receipt_order_id"])) {
@@ -109,7 +104,7 @@ if ($conn) {
                         <!-- construct item rows for the table -->
                         <?php foreach ($order["items"] as $item) { ?>
                         <tr>
-                            <td><?php echo isset($PRODUCT_NAMES[$item["product"]]) ? $PRODUCT_NAMES[$item["product"]] : $item["product"] ?></td>
+                            <td><?php echo product_name($item["product"]) ?></td>
                             <td><?php echo strtoupper($item["capacity"]) ?></td>
                             <td>$<?php echo $item["price"] ?></td>
                             <td><?php echo $item["quantity"] ?></td>

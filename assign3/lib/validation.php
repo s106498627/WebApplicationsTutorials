@@ -162,6 +162,13 @@ function validate_payment(&$errMsgs) {
         $errMsgs[] = "Enter the expiry date.";
     } else if (!preg_match('/^(0[1-9]|1[0-2])-[0-9]{2}$/', $expiry)) {
         $errMsgs[] = "Expiry date must be in the format MM-YY.";
+    } else { // check expiry date to see if out of date
+        $mmyy = date_create_from_format("m-y", $expiry);
+        date_modify($mmyy, "+1 month"); // card valid until the last day of the month: https://www.reddit.com/r/CreditCards/comments/omeb89/are_credit_cards_good_until_the_last_day_of_the/
+        $now = date_create();
+        if ($mmyy < $now) {
+            $errMsgs[] = "Card is expired.";
+        }
     }
 
     if ($cvv === "") {

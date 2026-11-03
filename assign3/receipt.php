@@ -137,7 +137,8 @@ if ($conn) {
         <!-- END Receipt -->
         <?php } ?>
 
-        <a class="button-link" href="index.php">Back to home</a>
+        
+        <a class="button-link main-margin" href="index.php">Back to home</a>
     </main>
 
     <?php include_once("components/footer.inc.php") ?>

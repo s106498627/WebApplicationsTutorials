@@ -76,7 +76,8 @@ h1,
 h2,
 h3,
 ul,
-ol {
+ol,
+.main-margin {
     margin: auto var(--page-gutter);
     list-style-position: inside;
     overflow-wrap: break-word;

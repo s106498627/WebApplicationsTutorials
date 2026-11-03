@@ -31,8 +31,8 @@ unset($_SESSION["payment_post"]);
 
 // prices for the order summary, same as the cart shows
 $conn = db_connect();
-$prices = load_product_prices($conn);
-$extraPrices = load_extra_prices($conn);
+$prices = get_product_prices($conn);
+$extraPrices = get_extra_prices($conn);
 if ($conn) {
     mysqli_close($conn);
 }

@@ -55,9 +55,10 @@
         </h2>
         <br>
         <p>
-            I extended my cart from part 2 by loading the prices of the product, SKU price, and cost of any extras from
-            the DB. This has the advantage that When the prices change, the website does not need updating so the user
-            will always see an up-to-date price.
+            I extended my <a href="enquire.php">cart</a> from part 2 by loading the prices of the product, SKU price,
+            and cost of any extras from the DB. This has the advantage that When the prices change, the website does not
+            need updating so the user will always see an up-to-date price. This uses the `get_product_prices()` and
+            `get_extra_prices()` functions from query.php, which gets all the products and extras in each table.
         </p>
     </main>
 

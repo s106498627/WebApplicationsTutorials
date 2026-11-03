@@ -13,8 +13,8 @@ unset($_SESSION["enquire_post"]);
 
 // cart prices come from the products table
 $conn = db_connect();
-$prices = load_product_prices($conn);
-$extraPrices = load_extra_prices($conn);
+$prices = get_product_prices($conn);
+$extraPrices = get_extra_prices($conn);
 if ($conn) {
     mysqli_close($conn);
 }

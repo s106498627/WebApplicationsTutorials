@@ -273,16 +273,6 @@ function get_product_prices($conn) {
     return $prices;
 }
 
-// get_product_prices for the cart and payment pages. empty if the db is down so page can render w/o prices
-// doesn't close $conn so it can be reused, the page closes it
-function load_product_prices($conn) {
-    if (!$conn) {
-        return [];
-    }
-    $prices = get_product_prices($conn);
-    return $prices === false ? [] : $prices;
-}
-
 // price of every extra for the cart, as $prices[extra_name] = price. returns false if any errors
 function get_extra_prices($conn) {
     $result = mysqli_query($conn, "SELECT extra_name, price FROM extras");
@@ -296,15 +286,6 @@ function get_extra_prices($conn) {
     mysqli_free_result($result);
 
     return $prices;
-}
-
-// get_extra_prices, empty if the db is down and doesn't close $conn, same as load_product_prices
-function load_extra_prices($conn) {
-    if (!$conn) {
-        return [];
-    }
-    $prices = get_extra_prices($conn);
-    return $prices === false ? [] : $prices;
 }
 
 // search orders for the manager page. filters are optional, empty string = dont filter.

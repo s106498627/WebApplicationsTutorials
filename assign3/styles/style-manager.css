@@ -1,0 +1,55 @@
+/*
+filename: style-manager.css
+author: Charles Hutcheson
+created: 2026-10-31
+last modified: 2026-10-31
+description: styles the order search and order table on manager.php
+*/
+
+/* search form is a single column so needs to be narrower than orders form */
+.manager-search {
+    width: min(80%, 40rem);
+}
+
+.manager-table {
+    min-width: 60rem;
+}
+
+/* get rid of styling to the list */
+.manager-products {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* remove the grid layout from style-form.css used in orders form, won't be needed in the table cells */
+form.manager-action {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0 0 0.5rem 0;
+    width: auto;
+}
+
+form.manager-action select {
+    border: 0.0625rem solid var(--background-border-color);
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    min-height: 2.25rem;
+    padding: 0.25rem 0.5rem;
+}
+
+form.manager-action button[type="submit"] {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+    width: auto;
+}
+
+/* ok result of the last update or cancel */
+.manager-message {
+    background-color: var(--box-tertiary-color);
+    border: 0.125rem solid var(--tertiary-color);
+    border-radius: 0.25rem;
+    padding: 0.75rem 1rem;
+}

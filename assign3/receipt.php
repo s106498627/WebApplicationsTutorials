@@ -1,8 +1,8 @@
-<!-- Description: displays info saved to DB about the order -->
-<!-- Author: Charlie Hutcheson -->
-<!-- Date: 2026-11-03 -->
-
 <?php
+// Description: displays info saved to DB about the order
+// Author: Charlie Hutcheson
+// Date: 2026-11-03
+
 session_start();
 require_once("lib/helpers.php");
 require_once("lib/query.php");

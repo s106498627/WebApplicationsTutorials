@@ -1,7 +1,8 @@
-<!-- Description: Homepage for Sandish Site -->
-<!-- Author: Charlie Hutcheson -->
-<!-- Date: 2026-11-03 -->
-
+<?php
+// Description: Homepage for Sandish Site
+// Author: Charlie Hutcheson
+// Date: 2026-11-03
+?>
 <!DOCTYPE html>
 <html lang="en">
 

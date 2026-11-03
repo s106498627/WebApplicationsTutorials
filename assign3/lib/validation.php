@@ -1,7 +1,8 @@
-<!-- Description: All the validations (cart, details and payments) for site -->
-<!-- Author: Charlie Hutcheson -->
-<!-- Date: 2026-11-03 -->
 <?php
+// Description: All the validations (cart, details and payments) for site
+// Author: Charlie Hutcheson
+// Date: 2026-11-03
+
 require_once("helpers.php");
 
 // valid first digits for state postcodes

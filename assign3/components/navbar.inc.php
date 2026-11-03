@@ -1,7 +1,8 @@
-<!-- Description: menu bar for Sandish Site -->
-<!-- Author: Charlie Hutcheson -->
-<!-- Date: 2026-11-03 -->
-
+<?php
+// Description: menu bar for Sandish Site
+// Author: Charlie Hutcheson
+// Date: 2026-11-03
+?>
 <!-- BEGIN Nav Bar -->
 <nav class="navbar">
     <a href=".">

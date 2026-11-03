@@ -1,7 +1,8 @@
-<!-- Description: Order form for all products -->
-<!-- Author: Charlie Hutcheson -->
-<!-- Date: 2026-11-03 -->
-
+<?php
+// Description: Order form for all products
+// Author: Charlie Hutcheson
+// Date: 2026-11-03
+?>
 <!DOCTYPE html>
 <html lang="en">
 

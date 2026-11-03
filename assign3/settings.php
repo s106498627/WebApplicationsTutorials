@@ -1,7 +1,8 @@
-<!-- Description: DB credentials, DO NOT do this in real life -->
-<!-- Author: Charlie Hutcheson -->
-<!-- Date: 2026-11-03 -->
 <?php
+// Description: DB credentials, DO NOT do this in real life
+// Author: Charlie Hutcheson
+// Date: 2026-11-03
+
 	$DEBUG = false;
 	if (!$DEBUG) {
 		// prod settings

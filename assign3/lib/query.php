@@ -1,9 +1,9 @@
-<!-- Description: All the queries and other DB related activities the server 
- makes to the DB -->
-<!-- Author: Charlie Hutcheson -->
-<!-- Date: 2026-11-03 -->
-
 <?php
+// Description: All the queries and other DB related activities the server
+// makes to the DB
+// Author: Charlie Hutcheson
+// Date: 2026-11-03
+
 function db_connect() {
     // ../ doesn't work as expected, google says to concat with the __DIR__ global var, which is file's current dir
     require(__DIR__ . "/../settings.php"); // include here to limit scope vars are in.

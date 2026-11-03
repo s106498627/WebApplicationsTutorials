@@ -1,8 +1,7 @@
-<!-- Description: Enter payment information -->
-<!-- Author: Charlie Hutcheson -->
-<!-- Date: 2026-11-03 -->
-
 <?php
+// Description: Enter payment information 
+// Author: Charlie Hutcheson 
+// Date: 2026-11-03 
 session_start();
 require_once("lib/helpers.php");
 require_once("lib/validation.php");

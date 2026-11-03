@@ -1,3 +1,6 @@
+<!-- Description: Various helper fns to be used throughout the project -->
+<!-- Author: Charlie Hutcheson -->
+<!-- Date: 2026-11-03 -->
 <?php
 
 // php 5 warns on every date function if the server has no date.timezone set, and that warning

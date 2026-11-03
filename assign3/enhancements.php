@@ -1,3 +1,7 @@
+<!-- Description: Describes HTML enhancements -->
+<!-- Author: Charlie Hutcheson -->
+<!-- Date: 2026-11-03 -->
+
 <!DOCTYPE html>
 <html lang="en">
 

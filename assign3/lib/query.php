@@ -1,3 +1,8 @@
+<!-- Description: All the queries and other DB related activities the server 
+ makes to the DB -->
+<!-- Author: Charlie Hutcheson -->
+<!-- Date: 2026-11-03 -->
+
 <?php
 function db_connect() {
     require("settings.php"); // include here to limit scope vars are in.

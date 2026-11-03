@@ -1,3 +1,7 @@
+<!-- Description: Manage orders, change progress, cancel orders -->
+<!-- Author: Charlie Hutcheson -->
+<!-- Date: 2026-11-03 -->
+
 <?php
 session_start();
 require_once("lib/helpers.php");

@@ -5,7 +5,8 @@
 
 <?php
 function db_connect() {
-    require("settings.php"); // include here to limit scope vars are in.
+    // ../ doesn't work as expected, google says to concat with the __DIR__ global var, which is file's current dir
+    require(__DIR__ . "/../settings.php"); // include here to limit scope vars are in.
     // @ hides warnings
     $conn = @mysqli_connect($host, $user, $pwd, $sql_db);
     return $conn;

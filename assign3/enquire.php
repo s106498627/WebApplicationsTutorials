@@ -157,12 +157,12 @@ if ($conn) {
                     <section class="cart-item cart-card">
                         <div class="cart-card-header">
                             <h3 class="cart-card-title">Item <span class="cart-item-number"></span></h3>
-                            <button type="button" class="icon-button cart-remove"><span
-                                    class="icons-delete"></span></button>
+                            <button type="button" class="icon-button cart-remove" aria-label="Delete Item Button"><span
+                                        class="icons-delete" aria-hidden="true"></span></button>
                         </div>
-
-                        <p class="cart-label">Product</p>
-                        <div class="cart-card-group" role="radiogroup">
+                        
+                        <fieldset class="cart-card-group">
+                            <legend class="cart-label">Product</legend>
                             <label class="cart-card-group-item">
                                 <!-- see: https://developer.mozilla.org/en-US/docs/Web/HTML/How_to/Use_data_attributes
                                 used to get input field type in the js by getAttribute -->
@@ -186,7 +186,7 @@ if ($conn) {
                                     <span class="cart-card-group-item-price"><?php echo from_price($prices, "classic-usb-a") ?></span>
                                 </span>
                             </label>
-                        </div>
+                        </fieldset>
 
                         <div class="cart-field-row">
                             <label class="cart-field cart-field-select">

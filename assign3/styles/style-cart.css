@@ -86,6 +86,7 @@ form .cart-card-header {
 form .cart-card-group {
     /* stretch so every chip in a row is as tall as the tallest */
     align-items: stretch;
+    border: none;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -94,6 +95,7 @@ form .cart-card-group {
 
 /* overrides `form div>label` and `fieldset label` in style-form.css */
 form .cart-card-group .cart-card-group-item {
+    align-items: stretch;
     cursor: pointer;
     display: flex;
     flex: 1 1 10rem;

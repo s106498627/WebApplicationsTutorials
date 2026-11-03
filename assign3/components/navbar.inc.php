@@ -10,7 +10,6 @@
     </a>
 
     <div class="navbar-link-group">
-        <a class="button-link" href=".">Home</a>
         <a class="button-link" href="product.php">Products</a>
         <a class="button-link" href="enquire.php">Enquire</a>
         <a class="button-link" href="enquire2.php">Enquire 2</a>

@@ -213,13 +213,18 @@ $_SESSION["manager_search"] = http_build_query([
                                 <input type="hidden" name="action" value="update">
                                 <input type="hidden" name="order-id" value="<?php echo $order["order_id"] ?>">
                                 <!-- dummy label to stop warnings complaining -->
-                                <label for="status-<?php echo $order["order_id"] ?>" hidden></label>
+                                <label for="status-<?php echo $order["order_id"] ?>" hidden>
+                                    Order <?php echo $order["order_id"] ?> status
+                                </label>
                                 <select id="status-<?php echo $order["order_id"] ?>" name="status">
                                     <?php foreach ($STATUSES as $status) { ?>
                                     <option value="<?php echo $status ?>" <?php echo $order["order_status"] === $status ? "selected" : "" ?>><?php echo ucfirst(strtolower($status)) ?></option>
                                     <?php } ?>
                                 </select>
-                                <button type="submit" class="button-link">Update</button>
+                                <label for="submit-<?php echo $order["order_id"] ?>" hidden>
+                                    submit order <?php echo $order["order_id"] ?>
+                                </label>
+                                <button id="submit-<?php echo $order["order_id"] ?>" type="submit" class="button-link">Update</button>
                             </form>
 
                             <!-- only allow cancelling order if the product is pending ie not shipped yet -->
@@ -228,7 +233,10 @@ $_SESSION["manager_search"] = http_build_query([
                                 <input type="hidden" name="action" value="cancel">
                                 <!-- carries order ID to backend logic to update DB -->
                                 <input type="hidden" name="order-id" value="<?php echo $order["order_id"] ?>">
-                                <button type="submit" class="button-link button-secondary">Cancel order</button>
+                                <label for="cancel-<?php echo $order["order_id"] ?>" hidden>
+                                    Cancel order <?php echo $order["order_id"] ?>
+                                </label>
+                                <button id="cancel-<?php echo $order["order_id"] ?>" type="submit" class="button-link button-secondary">Cancel order</button>
                             </form>
                             <?php } ?>
                         </td>

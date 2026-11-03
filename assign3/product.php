@@ -46,7 +46,7 @@
                     <!-- hidden by default, activated by details button -->
                     <div id="popover-pokedrive" popover>
                         <button type="button" class="button-link" popovertarget="popover-pokedrive"
-                        popovertargetaction="hide" ><span class="icons-close"></span></button>
+                        popovertargetaction="hide" >X</button>
                         <h2>PokeDrive</h2>
                         <img src="images/product/pokemon-usb-c.png" alt="Pokemon USB drive.">
                         <p>
@@ -78,7 +78,7 @@
                     <!-- hidden by default, activated by details button -->
                     <div id="popover-secureadrive" popover>
                         <button type="button" class="button-link" popovertarget="popover-secureadrive"
-                        popovertargetaction="hide" ><span class="icons-close"></span></button>
+                        popovertargetaction="hide" >X</button>
                         <h2>Secure-A-Drive</h2>
                         <img src="images/product/extreme-usb.webp" alt="Secure USB drive.">
                         <p>
@@ -112,7 +112,7 @@
                     <!-- hidden by default, activated by details button -->
                     <div id="popover-classic" popover>
                         <button type="button" class="button-link" popovertarget="popover-classic"
-                        popovertargetaction="hide" ><span class="icons-close"></span></button>
+                        popovertargetaction="hide" >X</button>
                         <h2>Secure-A-Drive</h2>
                         <img src="images/product/classic-usb-a.webp" alt="Classic USB drive.">
                         <p>
